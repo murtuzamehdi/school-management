@@ -23,8 +23,8 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_hireDate');
             $table->string('employee_dob');
             
-            $table->string('user_id');
-            $table->string('dept_id');
+            $table->integer('user_id');
+            $table->integer('dept_id');
             $table->timestamps();
         });
     }

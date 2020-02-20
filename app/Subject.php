@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Section extends Model
+class Subject extends Model
 {
     protected $fillable = [
-        'section_name',
-        'class_id',
+        'subject_name',
     ];
 }

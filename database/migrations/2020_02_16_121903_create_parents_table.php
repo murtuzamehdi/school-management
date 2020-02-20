@@ -16,17 +16,23 @@ class CreateParentsTable extends Migration
         Schema::create('parents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('father_name');
+            $table->string('father_email');
             $table->string('father_phone_number');
+            $table->string('father_address');
             $table->string('father_cnic');
             $table->string('father_occupation');
             $table->string('father_annual_income');
             $table->string('mother_name');
+            $table->string('mother_email');
             $table->string('mother_phone_number');
+            $table->string('mother_address');
             $table->string('mother_cnic');
             $table->string('mother_occupation');
             $table->string('mother_annual_income');
-            $table->integer('user_id');
-            $table->timestamps();
+            
+            $table->integer('father_user_id');
+            $table->integer('mother_user_id');
+            $table->timestamps();   
         });
     }
 

@@ -29,7 +29,7 @@ class CreateStudentsTable extends Migration
             $table->string('student_previous_school');
             $table->string('student_disability');
 
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
