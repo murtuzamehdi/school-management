@@ -12,5 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+//=================== HR ======================== 
+// Route::resource('/student', 'StudentController');
+Route::any('/student', 'HRController@index');
+Route::any('/employee', 'HRController@employeeindex');
+Route::any('/parents', 'HRController@parentindex');
+Route::any('/setfees', 'HRController@feesindex');
+Route::any('/addstudent', 'HRController@addstudent');
+Route::any('/addemployee', 'HRController@addemployee');
+Route::any('/addparent', 'HRController@addparent');
+Route::any('/addfees', 'HRController@addfess');

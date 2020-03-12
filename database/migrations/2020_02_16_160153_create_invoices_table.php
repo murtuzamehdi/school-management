@@ -18,11 +18,11 @@ class CreateInvoicesTable extends Migration
             $table->bigInteger('product_id');
             $table->primary(['id' , 'product_id']);
             
-            $table->integer('supplier_id');
+            $table->integer('supplier_id')->nullable();
             
-            $table->date('purchase_date');
-            $table->string('quantity');
-            $table->string('amount');
+            $table->date('purchase_date')->nullable();
+            $table->string('quantity')->nullable();
+            $table->string('amount')->nullable();
             
 
 

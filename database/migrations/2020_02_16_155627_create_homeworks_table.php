@@ -15,14 +15,14 @@ class CreateHomeworksTable extends Migration
     {
         Schema::create('homeworks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('homework');
-            $table->string('file_path');
-            $table->string('description');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('homework')->nullable();
+            $table->string('file_path')->nullable();
+            $table->string('description')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
 
-            $table->integer('class_section_id');
-            $table->integer('subject_id');
+            $table->integer('class_section_id')->nullable();
+            $table->integer('subject_id')->nullable();
             $table->timestamps();
         });
     }

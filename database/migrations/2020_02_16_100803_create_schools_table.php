@@ -15,10 +15,10 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->bigIncrements('school_id');
-            $table->string('school_name');
-            $table->string('school_established');
-            $table->string('school_about');
-            $table->string('school_medium');
+            $table->string('school_name')->nullable();
+            $table->string('school_established')->nullable();
+            $table->string('school_about')->nullable();
+            $table->string('school_medium')->nullable();
             $table->timestamps();
         });
     }
