@@ -38,4 +38,8 @@ Route::any('/parentinfo', 'HRController@viewparent');
 // Route::any('/viewemployee', 'HRController@viewemployee');
 Route::any('student/fetchdata/{id}', 'HRController@fetchstudent');
 Route::any('employee/fetchdata/{id}', 'HRController@fetchemployee');
+Route::any('parent/fetchdata/{id}', 'HRController@fetchparent');
+
+Route::any('parent/{id}/editparent' , 'HRController@editparent');
+Route::any('parent/{id}', 'HRController@updateparent');
 // Route::resource('/student', 'HRController');

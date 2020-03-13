@@ -113,6 +113,7 @@ class HRController extends Controller
         $parent->save();
         return redirect('/');
     }
+
     public function setfees(Request $request)
     {
         // dd($request);
@@ -137,6 +138,14 @@ class HRController extends Controller
         
         return view('HR.view_employee',compact('employee'));
     }
+
+    public function viewparent(Request $request)
+    {
+        // dd($request);
+        $parent = Parents::all();
+        
+        return view('HR.view_parent',compact('parent'));
+    }
     
     public function fetchstudent($id)
     {
@@ -144,6 +153,20 @@ class HRController extends Controller
         {
             $data = Student::where('id' , $id)
             ->get();
+            return $data;
+        } 
+        
+        return view('HR.view_student');
+    }
+
+    public function fetchparent($id)
+    {
+        // dd($id);
+        if(request()->ajax())
+        {
+            $data = Parents::where('id' , $id)
+            ->get();
+            // dd($data);
             return $data;
         } 
         
@@ -198,6 +221,13 @@ class HRController extends Controller
         return view('HR.edit_employee', compact('employee'));
     }
 
+    public function editparent($id){
+        // dd($id);
+        $parent = Parents::where('id', $id)->get();
+        // dd($parent);
+        return view('HR.edit_parent',compact('parent'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -250,6 +280,31 @@ class HRController extends Controller
             $employee->employee_dob = $request->employee_dob;
             $employee->dept_id = $request->department;
             $employee->save();
+        //    dd($id);
+       }
+       return redirect('/');
+    }
+
+    public function updateparent(Request $request, $id)
+    {
+       $parent = Parents::where('id', $id)->first();
+       if($parent != null){
+        //    dd($request);
+            $parent->father_name         = $request->father_name;
+            $parent->father_email        = $request->father_email;
+            $parent->father_phone_number = $request->father_phone_number;
+            $parent->father_address      = $request->father_address;
+            $parent->father_cnic         = $request->father_cnic;
+            $parent->father_occupation   = $request->father_occupation;
+            $parent->father_annual_income = $request->father_annual_income;
+            $parent->mother_name         = $request->mother_name;
+            $parent->mother_email        = $request->mother_email;
+            $parent->mother_phone_number = $request->mother_phone_number;
+            $parent->mother_address      = $request->mother_address;
+            $parent->mother_cnic         = $request->mother_cnic;
+            $parent->mother_occupation   = $request->mother_occupation;
+            $parent->mother_annual_income = $request->mother_annual_income;
+            $parent->save();
         //    dd($id);
        }
        return redirect('/');

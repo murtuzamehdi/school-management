@@ -34,7 +34,6 @@
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Class</label>
                   <div class="col-sm-10">
-                      A
                     <input type="text" class="form-control" name="class_id">
                   </div>
                 </div>
