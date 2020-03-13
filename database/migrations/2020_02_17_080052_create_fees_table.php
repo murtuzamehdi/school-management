@@ -18,6 +18,10 @@ class CreateFeesTable extends Migration
             
             $table->integer('class_id')->nullable();
             
+            $table->string('annual_charges')->nullable();
+            $table->string('lab')->nullable();
+            $table->string('tution_fee')->nullable();
+            $table->string('year')->nullable();
             $table->string('amount')->nullable();
             $table->timestamps();
         });

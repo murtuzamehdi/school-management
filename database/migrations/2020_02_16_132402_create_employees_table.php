@@ -22,7 +22,9 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_cnic')->nullable();
             $table->string('employee_hireDate')->nullable();
             $table->string('employee_dob')->nullable();
+            $table->string('marital_status')->nullable();
             
+            $table->integer('branch_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('dept_id')->nullable();
             $table->timestamps();

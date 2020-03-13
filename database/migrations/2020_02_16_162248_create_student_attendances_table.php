@@ -18,9 +18,11 @@ class CreateStudentAttendancesTable extends Migration
             $table->date('date');
             $table->primary(['student_id' , 'date']);
 
-            $table->bigInteger('teacher_id');
-            $table->string('status');
-            $table->string('remarks');
+            $table->bigInteger('roll_no')->nullable();
+            $table->bigInteger('class_id')->nullable();
+            $table->bigInteger('teacher_id')->nullable();
+            $table->string('status')->nullable();
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }

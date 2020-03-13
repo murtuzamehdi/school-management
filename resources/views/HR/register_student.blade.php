@@ -44,6 +44,24 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Father Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="father_name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Parent CNIC</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="parent_cnic">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="student_email">
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Gender</label>
                   <div class="col-sm-10">
                     <select class="form-control" name="student_gender">
@@ -98,6 +116,18 @@
                   <label class="col-sm-2 col-sm-2 control-label">Admission Date</label>
                   <div class="col-sm-10">
                     <input type="date" class="form-control" name="student_date_of_admission">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Admission Class</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="student_class_of_admission">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Class Section</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="student_class_section">
                   </div>
                 </div>
                 <div class="form-group">

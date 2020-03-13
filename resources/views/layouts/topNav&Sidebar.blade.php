@@ -221,8 +221,11 @@
             </a>
           <ul class="sub">
             <li><a href="/student">Add New Student</a></li>
+            <li><a href="/viewstudents">View Students</a></li>
             <li><a href="/employee">Add New Employee</a></li>
-            <li><a href="/parents">Add New Parents</a></li>
+            <li><a href="/viewemployee">View Employee</a></li>
+            <li><a href="/parents">Add Parents Information</a></li>
+            <li><a href="/parentinfo">View parents Information</a></li>
             <li><a href="/setfees">Set Fees Structure</a></li>
             {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
           </ul>

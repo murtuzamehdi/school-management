@@ -54,6 +54,9 @@ class HRController extends Controller
         // dd('as');
         $student = new Student();
         $student->student_name = $request->input('student_name');
+        $student->father_name = $request->input('father_name');
+        $student->parent_cnic = $request->input('parent_cnic');
+        $student->student_email = $request->input('student_email');
         $student->student_roll_no = $request->input('student_roll_no');
         $student->student_gender = $request->input('student_gender');
         $student->student_dob = $request->input('student_dob');
@@ -64,6 +67,8 @@ class HRController extends Controller
         $student->student_phone_number = $request->input('student_phone_number');
         $student->student_pic_path = $request->input('student_pic_path');
         $student->student_date_of_admission = $request->input('student_date_of_admission');
+        $student->student_class_of_admission = $request->input('student_class_of_admission');
+        $student->student_class_section = $request->input('student_class_section');
         $student->student_previous_school = $request->input('student_previous_school');
         $student->student_disability = $request->input('student_disability');
         $student->save();
@@ -111,23 +116,56 @@ class HRController extends Controller
     public function setfees(Request $request)
     {
         // dd($request);
-        $parent = new Parents();
-        $parent->father_name = $request->input('father_name');
-        $parent->father_email = $request->input('father_email');
-        $parent->father_phone_number = $request->input('father_phone_number');
-        $parent->father_address = $request->input('father_address');
-        $parent->father_cnic = $request->input('father_cnic');
-        $parent->father_occupation = $request->input('father_occupation');
-        $parent->father_annual_income = $request->input('father_annual_income');
-        $parent->mother_name = $request->input('mother_name');
-        $parent->mother_email = $request->input('mother_email');
-        $parent->mother_phone_number = $request->input('mother_phone_number');
-        $parent->mother_address = $request->input('mother_address');
-        $parent->mother_occupation = $request->input('mother_occupation');
-        $parent->mother_annual_income = $request->input('mother_annual_income');
+        $parent = new Fee();
+        
         $parent->save();
         return redirect('/');
     }
+
+    public function viewstudent(Request $request)
+    {
+        $students = Student::all();
+        // dd($students);
+        
+        return view('HR.view_student',compact('students'));
+    }
+
+    public function viewemployee(Request $request)
+    {
+        $employee = Employee::all();
+        // dd($students);
+        
+        return view('HR.view_employee',compact('employee'));
+    }
+    
+    public function fetchstudent($id)
+    {
+        if(request()->ajax())
+        {
+            $data = Student::where('id' , $id)
+            ->get();
+            return $data;
+        } 
+        
+        return view('HR.view_student');
+    }
+
+
+
+    public function fetchemployee($id)
+    {
+        if(request()->ajax())
+        {
+            $data = Employee::where('id' , $id)
+            ->get();
+            return $data;
+        } 
+        
+        return view('HR.view_employee');
+    }
+
+
+
 
     /**
      * Display the specified resource.
@@ -148,7 +186,16 @@ class HRController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::where('id',$id)->get();
+        return view('HR.edit_student', compact('student'));
+    }
+   
+   
+    public function editemployee($id)
+    {
+        // dd('as');
+        $employee = Employee::where('id',$id)->get();
+        return view('HR.edit_employee', compact('employee'));
     }
 
     /**
@@ -160,7 +207,52 @@ class HRController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $student = Student::where('id', $id)->first();
+       if($student != null){
+        //    dd($request);
+            $student->student_name    = $request->student_name;
+            $student->student_roll_no = $request->student_roll_no;
+            $student->father_name     = $request->father_name;
+            $student->parent_cnic     = $request->parent_cnic;
+            $student->student_email   = $request->student_email;
+            $student->student_gender  = $request->student_gender;
+            $student->student_dob     = $request->student_dob;
+            $student->student_blood_group = $request->student_blood_group;
+            $student->student_nationality = $request->student_nationality;
+            $student->student_religion = $request->student_religion;
+            $student->student_address = $request->student_address;
+            $student->student_phone_number = $request->student_phone_number;
+            $student->student_pic_path = $request->student_pic_path;
+            $student->student_date_of_admission = $request->student_date_of_admission;
+            $student->student_class_of_admission = $request->student_class_of_admission;
+            $student->student_class_section = $request->student_class_section;
+            $student->student_previous_school = $request->student_previous_school;
+            $student->student_disability = $request->student_disability;
+            $student->save();
+        //    dd($id);
+       }
+       return redirect('/');
+    }
+
+
+    public function updateemployee(Request $request, $id)
+    {
+       $employee = Employee::where('id', $id)->first();
+       if($employee != null){
+        //    dd($request);
+            $employee->employee_name    = $request->employee_name;
+            $employee->employee_designation = $request->employee_designation;
+            $employee->employee_address     = $request->employee_address;
+            $employee->employee_gender     = $request->employee_gender;
+            $employee->employee_cnic   = $request->employee_cnic;
+            $employee->employee_phone_number  = $request->employee_phone_number;
+            $employee->employee_hireDate     = $request->employee_hireDate;
+            $employee->employee_dob = $request->employee_dob;
+            $employee->dept_id = $request->department;
+            $employee->save();
+        //    dd($id);
+       }
+       return redirect('/');
     }
 
     /**
