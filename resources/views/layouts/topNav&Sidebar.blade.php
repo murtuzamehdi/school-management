@@ -226,23 +226,23 @@
             <li><a href="/viewemployee">View Employee</a></li>
             <li><a href="/parents">Add Parents Information</a></li>
             <li><a href="/parentinfo">View parents Information</a></li>
-            <li><a href="/setfees">Set Fees Structure</a></li>
+            {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
             {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
           </ul>
         </li>
         <li class="sub-menu">
           <a href="javascript:;">
             <i class="fa fa-cogs"></i>
-            <span>Components</span>
+            <span>Accounts</span>
             </a>
           <ul class="sub">
-            <li><a href="grids.html">Grids</a></li>
-            <li><a href="calendar.html">Calendar</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="/setfees">Set Fees Structure</a></li>
+           <li><a href="/viewfees">View Fees Structure</a></li>
+             {{-- <li><a href="gallery.html">Gallery</a></li>
             <li><a href="todo_list.html">Todo List</a></li>
             <li><a href="dropzone.html">Dropzone File Upload</a></li>
             <li><a href="inline_editor.html">Inline Editor</a></li>
-            <li><a href="file_upload.html">Multiple File Upload</a></li>
+            <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
           </ul>
         </li>
         <li class="sub-menu">

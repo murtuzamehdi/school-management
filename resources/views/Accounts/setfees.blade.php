@@ -34,13 +34,45 @@
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Class</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="class_id">
+                    <select class="form-control" name="class_id">
+                        <option></option>
+                        @php
+                           $class = App\Classes::all();
+                        @endphp
+                            @foreach ($class as $classes)
+                            <option value="{{$classes->id}}">{{$classes->class_name}}</option>
+                            @endforeach
+                      </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Amount</label>
+                  <label class="col-sm-2 col-sm-2 control-label">Annual Charges</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="employee_designation">
+                    <input type="text" class="form-control" name="annual_charges">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Lab Charges</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="lab">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Tution Fees</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="tution_fee">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Fee Of Year</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="year">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Amounts</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="amount">
                   </div>
                 </div>
                 

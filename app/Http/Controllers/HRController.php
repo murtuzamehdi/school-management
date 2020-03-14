@@ -114,14 +114,14 @@ class HRController extends Controller
         return redirect('/');
     }
 
-    public function setfees(Request $request)
-    {
-        // dd($request);
-        $parent = new Fee();
+    // public function setfees(Request $request)
+    // {
+    //     // dd($request);
+    //     $parent = new Fee();
         
-        $parent->save();
-        return redirect('/');
-    }
+    //     $parent->save();
+    //     return redirect('/');
+    // }
 
     public function viewstudent(Request $request)
     {
