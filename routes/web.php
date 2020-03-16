@@ -49,4 +49,12 @@ Route::any('/setfees', 'AccountsController@feesindex');
 Route::any('/addfees', 'AccountsController@addfess');
 Route::any('/viewfees', 'AccountsController@viewfess');
 Route::any('fees/fetchdata/{fees_id}', 'AccountsController@fetchfees');
-Route::any('fees/', 'AccountsController@updatefees');
+Route::any('/fees', 'AccountsController@updatefees');
+Route::any('/feechallan', 'AccountsController@feechallan');
+Route::any('/generatechallan', 'AccountsController@generatechallan');
+Route::any('/generatechallan/bulk', 'AccountsController@bulk');
+
+Route::resource('/class','StudentController');
+Route::any('/subjects','StudentController@subjectindex');
+Route::any('/createsubjects','StudentController@createsubjects');
+Route::any('/section','StudentController@sectionindex');

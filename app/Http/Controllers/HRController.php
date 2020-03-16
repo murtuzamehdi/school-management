@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Employee;
 use App\Parents;
+use App\Fee;
+use DB;
 class HRController extends Controller
 {
     /**
@@ -51,7 +53,7 @@ class HRController extends Controller
      */
     public function addstudent(Request $request)
     {
-        // dd('as');
+        // dd($request);
         $student = new Student();
         $student->student_name = $request->input('student_name');
         $student->father_name = $request->input('father_name');
@@ -123,10 +125,22 @@ class HRController extends Controller
     //     return redirect('/');
     // }
 
-    public function viewstudent(Request $request)
+    public function viewstudent()
     {
+        // dd($request);
         $students = Student::all();
-        // dd($students);
+
+        // foreach ($students as $student) {
+        //     # code...
+        //     // $parent = Parents::where('father_cnic',$student->parent_cnic)->orwhere('mother_cnic',$student->parent_cnic)->get();
+        //     // dd($parent);
+        // }
+
+        
+
+        
+
+            // Student::all();
         
         return view('HR.view_student',compact('students'));
     }

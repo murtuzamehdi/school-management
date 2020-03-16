@@ -238,6 +238,7 @@
           <ul class="sub">
             <li><a href="/setfees">Set Fees Structure</a></li>
            <li><a href="/viewfees">View Fees Structure</a></li>
+           <li><a href="/feechallan">Generate Fee Challan</a></li>
              {{-- <li><a href="gallery.html">Gallery</a></li>
             <li><a href="todo_list.html">Todo List</a></li>
             <li><a href="dropzone.html">Dropzone File Upload</a></li>
@@ -248,18 +249,19 @@
         <li class="sub-menu">
           <a href="javascript:;">
             <i class="fa fa-book"></i>
-            <span>Extra Pages</span>
+            <span>Classes</span>
             </a>
           <ul class="sub">
-            <li><a href="blank.html">Blank Page</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="lock_screen.html">Lock Screen</a></li>
+            <li><a href="/class">Classes</a></li>
+            <li><a href="/subjects">Subject</a></li>
+            <li><a href="/section">Section</a></li>
+            {{-- <li><a href="lock_screen.html">Lock Screen</a></li>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="invoice.html">Invoice</a></li>
             <li><a href="pricing_table.html">Pricing Table</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="404.html">404 Error</a></li>
-            <li><a href="500.html">500 Error</a></li>
+            <li><a href="500.html">500 Error</a></li> --}}
           </ul>
         </li>
         <li class="sub-menu">

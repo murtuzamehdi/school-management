@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Fee;
+use App\Classes;
+use App\Student;
 use DB;
+use App\FeeDetail;
 class AccountsController extends Controller
 {
     /**
@@ -34,6 +37,51 @@ class AccountsController extends Controller
         $fee->amount = $request->amount;
         $fee->save();
         return redirect('/');
+    }
+
+    public function feechallan(){
+        $class= Classes::all();
+        $student=DB::table('students')
+        ->join('classes','classes.id','students.student_class_of_admission')
+        ->select('classes.*','students.*')
+        ->get();
+        return view('Accounts.feechallan',compact('class','student'));
+    }
+    public function bulk(Request $request){
+        // dd($request->all());
+        // dd($data['id']);
+        
+        $data=$request->all();
+        $count= count($data['id']);
+        // dd($count);
+        for($i = 0 ; $i < $count ; $i++){
+
+            FeeDetail::create(['student_id' => $data["id"][$i],'due_date' => $data["due_date"] , 'fee_month' => $data["fee_month"] , 'fees_id' => $data["fees_id"], 'current_ammount' => $data["current_ammount"]]);
+             
+         }
+ 
+
+        $class= Classes::all();
+        $student=DB::table('students')
+        ->join('classes','classes.id','students.student_class_of_admission')
+        ->select('classes.*','students.*')
+        ->get();
+        return view('Accounts.feechallan',compact('class','student'));
+    }
+
+    public function generatechallan(Request $request){
+        $class= Classes::all();
+        $student=DB::table('students')
+        ->join('classes','classes.id','students.student_class_of_admission')
+        ->select('classes.*','students.*')
+        ->where('student_class_of_admission',$request->classes)
+        ->get();
+        // dd($student);
+        $fees=DB::table('fees')
+        ->where('class_id',$request->classes)
+        ->get();
+        // dd($fees,$student);
+        return view('Accounts.generatechallan',compact('fees','student','class'));
     }
 
     /**

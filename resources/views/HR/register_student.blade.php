@@ -118,16 +118,32 @@
                     <input type="date" class="form-control" name="student_date_of_admission">
                   </div>
                 </div>
+                @php
+                    $classes =  App\Classes::all();
+                @endphp
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Admission Class</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="student_class_of_admission">
+                    <select class="form-control" name="student_class_of_admission">
+                    <option value=""></option>
+                    @foreach ($classes as $item)
+                    <option value="{{$item->id}}">{{$item->class_name}}</option>
+                    @endforeach
+                      </select>
                   </div>
                 </div>
+                @php
+                    $section =  App\Section::all();
+                @endphp
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Class Section</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="student_class_section">
+                    <select class="form-control" name="student_class_section">
+                    <option value=""></option>
+                    @foreach ($section as $item)
+                    <option value="{{$item->id}}">{{$item->section_name}}</option>
+                    @endforeach
+                      </select>
                   </div>
                 </div>
                 <div class="form-group">
