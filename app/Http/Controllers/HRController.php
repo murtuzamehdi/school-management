@@ -8,6 +8,7 @@ use App\Employee;
 use App\Parents;
 use App\Fee;
 use DB;
+use Illuminate\Support\Facades\Validator;
 class HRController extends Controller
 {
     /**
@@ -53,7 +54,16 @@ class HRController extends Controller
      */
     public function addstudent(Request $request)
     {
-        // dd($request);
+        // dd($request->validate([
+        //     'parents_cnic' => 'exists:parents,father_cnic',
+        //     'parents_cnic' => 'exists:parents,mother_cnic',
+        //     // 'body' => 'required',
+        //     ]));
+        // dd($validatedData);
+        // if($validatedData){
+        //         dd($request);
+        if (Parents::where('father_cnic', '=', $request->parent_cnic)->orwhere('mother_cnic', '=', $request->parent_cnic)->exists()){
+            // dd('as');
         $student = new Student();
         $student->student_name = $request->input('student_name');
         $student->father_name = $request->input('father_name');
@@ -75,6 +85,10 @@ class HRController extends Controller
         $student->student_disability = $request->input('student_disability');
         $student->save();
         return redirect('/');
+        }
+        return Redirect()->back()->withInput()->withErrors(['Parent Cnic Doesnt Exist']);
+       
+        
     }
 
 
@@ -127,16 +141,19 @@ class HRController extends Controller
 
     public function viewstudent()
     {
-        // dd($request);
-        $students = Student::all();
-
-        // foreach ($students as $student) {
-        //     # code...
-        //     // $parent = Parents::where('father_cnic',$student->parent_cnic)->orwhere('mother_cnic',$student->parent_cnic)->get();
-        //     // dd($parent);
-        // }
-
+        // $students = Student::all();
         
+        // // foreach ($students as $student) {
+            // //     # code...
+            // //     // $parent = Parents::where('father_cnic',$student->parent_cnic)->orwhere('mother_cnic',$student->parent_cnic)->get();
+            // //     // dd($parent);
+            // // }
+            $students = DB::table('parents')
+            ->join('students','students.parent_id','=','parents.id')
+            ->select('parents.*','students.*')
+            ->get();
+            // dd($students);
+            
 
         
 

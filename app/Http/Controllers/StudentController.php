@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Subject;
 use App\Section;
+use App\Classes;
 use DB;
 
 class StudentController extends Controller
@@ -17,10 +18,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-      $classes = DB::table('classes')
-      ->join('subjects','subjects.id','=','classes.subject_id')
-      ->select('classes.*','subjects.*')
-      ->get();
+      $classes = Classes::all();
     //   foreach($classes as $class){
     //   dd($class->class_name);
     //   }
@@ -47,6 +45,21 @@ class StudentController extends Controller
        return view('Classes.add_section', compact('section'));
     }
 
+    public function fetchsubject($id){
+        
+
+        if(request()->ajax())
+        {
+            $data = Subject::where('subject_id',$id)
+            ->get();
+            return $data;
+        } 
+        // dd($subject);
+
+        return view('Classes.add_subject');
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -67,9 +80,14 @@ class StudentController extends Controller
         // dd($request);
         $create = new Subject();
         $create->subject_name = $request->subject_name;
+        $create->class_id = $request->class_id;
+
         $create->save();
         
-        $subject = Subject::all();
+        $subject = DB::table('subjects')
+        ->join('classes','classes.class_id','subjects.class_id')
+        ->select('subjects.*','classes.*')
+        ->get();
     //   foreach($classes as $class){
     //   dd($class->class_name);
     //   }
@@ -77,25 +95,109 @@ class StudentController extends Controller
 
     }
 
+    public function updatesubject(Request $request){
+        $update = Subject::where('subject_id',$request->subject_id)->first();
+        if($update != null){
+            $update->subject_name = $request->subject_name;
+            $update->save();
+        }
+        $subject = Subject::all();
+        //   foreach($classes as $class){
+        //   dd($class->class_name);
+        //   }
+           return view('Classes.add_subject', compact('subject'));
+    }
+
+    // public function createsection(Request $request){
+    //     // dd($request);
+    //     $create = new Section();
+    //     $create->section_name = $request->section_name;
+    //     $create->save();
+        
+    //     $section = Section::all();
+    // //   foreach($classes as $class){
+    // //   dd($class->class_name);
+    // //   }
+    //    return view('Classes.add_section', compact('section'));
+
+    // }
+
+    // public function fetchsection($id){
+        
+
+    //     if(request()->ajax())
+    //     {
+    //         $data = Section::where('section_id',$id)
+    //         ->get();
+    //         return $data;
+    //     } 
+    //     // dd($subject);
+
+    //     return view('Classes.add_section');
+
+    // }
+
+    // public function updatesection(Request $request){
+    //     $update = Section::where('section_id',$request->section_id)->first();
+    //     if($update != null){
+    //         $update->section_name = $request->section_name;
+    //         $update->save();
+    //     }
+    //     $section = Section::all();
+    //     //   foreach($classes as $class){
+    //     //   dd($class->class_name);
+    //     //   }
+    //        return view('Classes.add_section', compact('section'));
+    // }
+
     public function store(Request $request)
     {
-        // $student = new Student();
-        // $student->student_name = $request->input('student_name');
-        // $student->student_roll_no = $request->input('student_roll_no');
-        // $student->student_gender = $request->input('student_gender');
-        // $student->student_dob = $request->input('student_dob');
-        // $student->student_blood_group = $request->input('student_blood_group');
-        // $student->student_nationality = $request->input('student_nationality');
-        // $student->student_religion = $request->input('student_religion');
-        // $student->student_address = $request->input('student_address');
-        // $student->student_phone_number = $request->input('student_phone_number');
-        // $student->student_pic_path = $request->input('student_pic_path');
-        // $student->student_date_of_admission = $request->input('student_date_of_admission');
-        // $student->student_previous_school = $request->input('student_previous_school');
-        // $student->student_disability = $request->input('student_disability');
-        // $student->save();
-        // return redirect('/');
+      
     }
+
+    public function createclass(Request $request){
+        // dd($request);
+        $create = new Classes();
+        $create->class_name = $request->class_name;
+        $create->section = $request->section;
+        $create->save();
+        
+        $classes = Classes::all();
+    //    return $this->index();
+       return view('Classes.add_classes', compact('classes'));
+    }
+
+    public function fetchclasses($id){
+        // dd($id);
+        if(request()->ajax())
+        {
+            $data = Classes::where('class_id',$id)
+            ->get();
+            return $data;
+        } 
+        // dd($subject);
+
+        return view('Classes.add_classes');
+
+    }
+
+    public function updateclass(Request $request){
+        // dd($request);
+        $update = Classes::where('class_id',$request->class_id)->first();
+        // dd($update);
+        if($update != null){
+            // $update->class_id = $request->class_id;
+            $update->class_name = $request->class_name;
+            $update->subject_id = $request->subject_id;
+            $update->save();
+        }
+        // dd('as');
+        $classes = DB::table('classes')
+        ->join('subjects','subjects.subject_id','=','classes.subject_id')
+        ->select('classes.*','subjects.*')
+        ->get();
+           return view('Classes.add_section', compact('classes'));
+    } 
 
     /**
      * Display the specified resource.

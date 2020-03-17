@@ -55,6 +55,21 @@ Route::any('/generatechallan', 'AccountsController@generatechallan');
 Route::any('/generatechallan/bulk', 'AccountsController@bulk');
 
 Route::resource('/class','StudentController');
+Route::any('/createclass','StudentController@createclass');
+Route::any('classes/fetchdata/{id}', 'StudentController@fetchclasses');
+Route::any('/updateclass', 'StudentController@updateclass');
+
+// ====================== Subject ========================
 Route::any('/subjects','StudentController@subjectindex');
 Route::any('/createsubjects','StudentController@createsubjects');
-Route::any('/section','StudentController@sectionindex');
+Route::any('subject/fetchdata/{id}', 'StudentController@fetchsubject');
+Route::any('/updatesubject', 'StudentController@updatesubject');
+
+// ===================== Section ===========================
+// Route::any('/createsection','StudentController@createsection');
+// Route::any('/section','StudentController@sectionindex');
+// Route::any('section/fetchdata/{id}', 'StudentController@fetchsection');
+// Route::any('/updatesection', 'StudentController@updatesection');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

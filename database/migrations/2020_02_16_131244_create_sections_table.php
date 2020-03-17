@@ -14,7 +14,7 @@ class CreateSectionsTable extends Migration
     public function up()
     {
         Schema::create('sections', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('section_id');
             $table->string('section_name')->nullable();
             
             $table->integer('class_id')->nullable();

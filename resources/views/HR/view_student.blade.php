@@ -69,6 +69,8 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th class="hidden-phone">Roll Number</th>
+                    <th class="hidden-phone" hidden>Father Name</th>
+                    <th class="hidden-phone" hidden>Mother Name</th>
                     <th class="hidden-phone">Phone Number</th>
                     <th class="hidden-phone">Date Of Addmission</th>
                     <th class="hidden-phone">Action</th>
@@ -81,6 +83,8 @@
                         <td>{{$student->student_name}}</td>
                         <td>{{$student->student_email}}</td>
                         <td class="hidden-phone">{{$student->student_roll_no}}</td>
+                        <td class="hidden-phone" hidden>{{$student->father_name}}</td>
+                        <td class="hidden-phone" hidden>{{$student->mother_name}}</td>
                         <td class="center hidden-phone">{{$student->student_phone_number}}</td>
                         <td class="center hidden-phone">{{$student->student_date_of_admission}}</td>
                         <td>
@@ -335,7 +339,9 @@
     function fnFormatDetails(oTable, nTr) {
       var aData = oTable.fnGetData(nTr);
       var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
+      // sOut += '<tr><td>Parents:</td><td>' + aData[4] + ' ' + aData[5] + '</td></tr>';
+      sOut += '<tr><td>Father Name:</td><td>' + aData[4] +'</td></tr>';
+      sOut += '<tr><td>Mother Name:</td><td>' + aData[5] +'</td></tr>';
     //   sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
     //   sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
       sOut += '</table>';

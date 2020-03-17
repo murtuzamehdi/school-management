@@ -254,7 +254,7 @@
           <ul class="sub">
             <li><a href="/class">Classes</a></li>
             <li><a href="/subjects">Subject</a></li>
-            <li><a href="/section">Section</a></li>
+            {{-- <li><a href="/section">Section</a></li> --}}
             {{-- <li><a href="lock_screen.html">Lock Screen</a></li>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="invoice.html">Invoice</a></li>

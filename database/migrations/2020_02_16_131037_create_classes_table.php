@@ -14,10 +14,10 @@ class CreateClassesTable extends Migration
     public function up()
     {
         Schema::create('classes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('class_id');
             $table->string('class_name')->nullable();
+            $table->string('section')->nullable();
             
-            $table->integer('subject_id')->nullable();
             $table->timestamps();
         });
     }

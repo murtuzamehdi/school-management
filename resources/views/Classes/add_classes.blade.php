@@ -29,28 +29,21 @@
           <div class="col-lg-12">
             <div class="form-panel">
               <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
-              <form class="form-horizontal style-form" method="POST" action="/class" accept-charset="UTF-8" enctype="multipart/form-data">
+              <form class="form-horizontal style-form" method="POST" action="/createclass" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Class</label>
                   <div class="col-sm-10">
-                  <input type="text" name="class_name" id="class" class="form-control">
+                  <input type="text" name="class_name" class="form-control">
                   </div>
                 </div>
-                @php
-                   $subject = App\Subject::all();
-                @endphp
                 <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">Subjects</label>
-                    <div class="col-sm-10">
-                    <select class="form-control" name="subject_id" id="subject_id">
-                        <option value=""></option>
-                        @foreach ($subject as $subjectt)    
-                       <option value="{{$subjectt->id}}">{{$subjectt->subject_name}}</option>
-                        @endforeach
-                        </select>
-                    </div>
+                  <label class="col-sm-2 col-sm-2 control-label">Section</label>
+                  <div class="col-sm-10">
+                  <input type="text" name="section" class="form-control">
+                  </div>
                 </div>
+
                 <button type="submit" class="btn btn-theme">Submit</button>
               </form>
             </div>
@@ -80,10 +73,10 @@
                               
                           <tr class="gradeX">
                               <td>{{$class->class_name}}</td>
-                              <td>{{$class->subject_name}}</td>
+                              <td>{{$class->section}}</td>
                               <td>
-                              <button type="submit" class="btn btn-success btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$class->id}}"><i class=" fa fa-eye"></i></button>
-                                <a href="employee/{{$class->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a>
+                              <button type="submit" class="btn btn-primary btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$class->class_id}}"><i class="fa fa-pencil"></i></button>
+                                {{-- <a href="employee/{{$class->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a> --}}
                                   <button class="btn btn-danger btn-xs"><i class=" fa fa-trash-o"></i></button>
                               </td>
                           </tr>
@@ -109,22 +102,22 @@
                         <div class="modal-body">
                           <div class="form-panel">
                               <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
-                              <div class="form-horizontal style-form">
+                              <form class="form-horizontal style-form" method="POST" action="/updateclass" accept-charset="UTF-8" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                  <label class="col-sm-2 col-sm-2 control-label">Name</label>
+                                  <label class="col-sm-2 col-sm-2 control-label">Class Name</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="employee_name" id="employee_name">
+                                    <input type="hidden" class="form-control" name="class_id" id="class_id">
+                                    <input type="text" class="form-control" name="class_name" id="class_name">
                                   </div>
-                                </div>
+                                </div>                                
                                 <div class="form-group">
-                                  <label class="col-sm-2 col-sm-2 control-label">Desgnation</label>
+                                  <label class="col-sm-2 col-sm-2 control-label">Class Name</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="employee_designation" id="employee_designation">
+                                    <input type="text" class="form-control" name="section" id="section">
                                   </div>
-                                </div>
-                                
-                                {{-- <button type="submit" class="btn btn-theme">Submit</button> --}}
+                                </div>                                
+                                <button type="submit" class="btn btn-theme">Update</button>
                               </div>
                             </div>
                         </div>
@@ -174,3 +167,41 @@
 </body>
 
 </html>
+<script type="text/javascript">
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+    }
+  }); 
+  $(document).on('click','.viewBtn',function(){
+    var id = $(this).attr('id');
+      $.ajax({
+      url: 'classes/fetchdata/'+ id ,
+      method:'GET',
+      dataType:'json',
+      success:function(data)
+      {
+          // console.log(data);
+        
+      //   $('#user_id').val(data[0].id); 
+        $('#class_id').val(data[0].class_id);  
+        $('#section').val(data[0].section);  
+        $('#class_name').val(data[0].class_name);  
+        // var a = $("#dept_id").val();
+        // var dept_id = data[0].dept_id;
+        // console.log(a,dept_id);
+        // if(a == dept_id){
+        //     $("#dept_id").selectedInde();
+        // }
+        // $('#dept_id').append("<option selected>"+data[0].name+"</option>"); 
+        // $('#password').val(data[0].password); 
+        
+        
+      },
+      error: function(e) {
+        console.log(e);
+      }
+    });
+  });
+
+</script>

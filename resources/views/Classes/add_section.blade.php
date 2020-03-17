@@ -29,7 +29,7 @@
           <div class="col-lg-12">
             <div class="form-panel">
               <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
-              <form class="form-horizontal style-form" method="POST" action="/createsubjects" accept-charset="UTF-8" enctype="multipart/form-data">
+              <form class="form-horizontal style-form" method="POST" action="/createsection" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Section Name</label>
@@ -66,8 +66,8 @@
                           <tr class="gradeX">
                               <td>{{$sections->section_name}}</td>
                               <td>
-                              <button type="submit" class="btn btn-success btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$sections->id}}"><i class=" fa fa-eye"></i></button>
-                                <a href="employee/{{$sections->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a>
+                              <button type="submit" class="btn btn-primary btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$sections->section_id}}"><i class="fa fa-pencil"></i></button>
+                                {{-- <a href="employee/{{$sections->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a> --}}
                                   <button class="btn btn-danger btn-xs"><i class=" fa fa-trash-o"></i></button>
                               </td>
                           </tr>
@@ -93,15 +93,16 @@
                         <div class="modal-body">
                           <div class="form-panel">
                               <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
-                              <div class="form-horizontal style-form">
+                              <form class="form-horizontal style-form" method="POST" action="/updatesection" accept-charset="UTF-8" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                  <label class="col-sm-2 col-sm-2 control-label">Name</label>
+                                  <label class="col-sm-2 col-sm-2 control-label">Section Name</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="employee_name" id="employee_name">
+                                    <input type="hidden" class="form-control" name="section_id" id="section_id">
+                                    <input type="text" class="form-control" name="section_name" id="section_name">
                                   </div>
                                 </div>
-                                {{-- <button type="submit" class="btn btn-theme">Submit</button> --}}
+                                <button type="submit" class="btn btn-theme">Update</button>
                               </div>
                             </div>
                         </div>
@@ -151,3 +152,40 @@
 </body>
 
 </html>
+<script type="text/javascript">
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+    }
+  }); 
+  $(document).on('click','.viewBtn',function(){
+    var id = $(this).attr('id');
+      $.ajax({
+      url: 'section/fetchdata/'+ id ,
+      method:'GET',
+      dataType:'json',
+      success:function(data)
+      {
+          // console.log(data);
+        
+      //   $('#user_id').val(data[0].id); 
+        $('#section_id').val(data[0].section_id);  
+        $('#section_name').val(data[0].section_name);  
+        // var a = $("#dept_id").val();
+        // var dept_id = data[0].dept_id;
+        // console.log(a,dept_id);
+        // if(a == dept_id){
+        //     $("#dept_id").selectedInde();
+        // }
+        // $('#dept_id').append("<option selected>"+data[0].name+"</option>"); 
+        // $('#password').val(data[0].password); 
+        
+        
+      },
+      error: function(e) {
+        console.log(e);
+      }
+    });
+  });
+
+</script>

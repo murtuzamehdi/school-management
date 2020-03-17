@@ -52,7 +52,10 @@
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Parent CNIC</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="parent_cnic">
+                    <input type="text" class="form-control @error('parent_cnic') is-invalid @enderror" name="parent_cnic" value="{{ old('parent_cnic') }}">
+                    @if($errors->any())
+                    <h4 style="color:red;">{{$errors->first()}}</h4>
+                    @endif
                   </div>
                 </div>
                 <div class="form-group">
