@@ -84,8 +84,8 @@
                         <td class="center hidden-phone">{{$parents->mother_phone_number}}</td>
                         <td class="center hidden-phone">{{$parents->father_annual_income}}</td>
                         <td>
-                        <button type="submit" class="btn btn-success btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$parents->id}}"><i class=" fa fa-eye"></i></button>
-                          <a href="parent/{{$parents->id}}/editparent"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a>
+                        <button type="submit" class="btn btn-success btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$parents->parent_id}}"><i class=" fa fa-eye"></i></button>
+                          <a href="parent/{{$parents->parent_id}}/editparent"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a>
                             <button class="btn btn-danger btn-xs"><i class=" fa fa-trash-o"></i></button>
                         </td>
                     </tr>

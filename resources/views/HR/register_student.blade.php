@@ -31,6 +31,7 @@
               <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
               <form class="form-horizontal style-form" method="POST" action="/addstudent" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
+                <input type="text" name="role_id" value="5" hidden>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Name</label>
                   <div class="col-sm-10">
@@ -59,11 +60,17 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Email</label>
+                  <label for="email" class="col-sm-2 col-sm-2 control-label">{{ __('E-Mail Address') }}</label>
+
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="student_email">
+                      <input id="student_email" type="email" class="form-control @error('email') is-invalid @enderror" name="student_email" value="{{ old('email') }}" required autocomplete="email">
+                      @error('email')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
-                </div>
+              </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Gender</label>
                   <div class="col-sm-10">
@@ -130,13 +137,13 @@
                     <select class="form-control" name="student_class_of_admission">
                     <option value=""></option>
                     @foreach ($classes as $item)
-                    <option value="{{$item->id}}">{{$item->class_name}}</option>
+                    <option value="{{$item->class_id}}">{{$item->class_name}}</option>
                     @endforeach
                       </select>
                   </div>
                 </div>
                 @php
-                    $section =  App\Section::all();
+                   $section =  App\Classes::all();
                 @endphp
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Class Section</label>
@@ -144,7 +151,7 @@
                     <select class="form-control" name="student_class_section">
                     <option value=""></option>
                     @foreach ($section as $item)
-                    <option value="{{$item->id}}">{{$item->section_name}}</option>
+                    <option value="{{$item->section}}">{{$item->section}}</option>
                     @endforeach
                       </select>
                   </div>
@@ -161,6 +168,28 @@
                     <input type="text" class="form-control" name="student_disability">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="password" class="col-sm-2 col-sm-2 control-label">{{ __('Password') }}</label>
+
+                  <div class="col-md-10">
+                      <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                      @error('password')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="password-confirm" class="col-sm-2 col-sm-2 control-label">{{ __('Confirm Password') }}</label>
+
+                  <div class="col-md-10">
+                      <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                  </div>
+              </div>
+                
                 <button type="submit" class="btn btn-theme">Submit</button>
               </form>
             </div>

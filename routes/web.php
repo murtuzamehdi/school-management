@@ -35,7 +35,7 @@ Route::any('employee/{id}', 'HRController@updateemployee');
 
 Route::any('parent/fetchdata/{id}', 'HRController@fetchparent');
 Route::any('parent/{id}/editparent' , 'HRController@editparent');
-Route::any('parent/{id}', 'HRController@updateparent');
+Route::any('/parent/{id}', 'HRController@updateparent');
 
 
 Route::any('/viewstudents', 'HRController@viewstudent');

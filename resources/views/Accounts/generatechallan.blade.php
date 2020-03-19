@@ -68,7 +68,7 @@
                     <select name="classes" class="form-control">
                         <option></option>
                         @foreach ($class as $c)
-                        <option value="{{$c->id}}">{{$c->class_name}}</option>
+                        <option value="{{$c->class_id}}">{{$c->class_name}}</option>
                         
                         @endforeach
                     </select>
@@ -121,7 +121,7 @@
                         @foreach ($student as $students)
                             
                         <tr>
-                            <td><input type="checkbox" name="selected-check" value="{{$students->id}}" /></td>
+                            <td><input type="checkbox" name="selected-check" value="{{$students->student_id}}" /></td>
                             <td>{{$students->student_name}}</td>
                             <td>{{$students->class_name}}</td>
                             <td>{{$students->student_date_of_admission}}</td>

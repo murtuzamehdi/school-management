@@ -8,7 +8,9 @@ use App\Employee;
 use App\Parents;
 use App\Fee;
 use DB;
+use App\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 class HRController extends Controller
 {
     /**
@@ -16,6 +18,15 @@ class HRController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
     public function index()
     {
         return view('HR.register_student');
@@ -52,37 +63,41 @@ class HRController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function addstudent(Request $request)
+    protected function addstudent(Request $data)
     {
-        // dd($request->validate([
-        //     'parents_cnic' => 'exists:parents,father_cnic',
-        //     'parents_cnic' => 'exists:parents,mother_cnic',
-        //     // 'body' => 'required',
-        //     ]));
-        // dd($validatedData);
-        // if($validatedData){
-        //         dd($request);
-        if (Parents::where('father_cnic', '=', $request->parent_cnic)->orwhere('mother_cnic', '=', $request->parent_cnic)->exists()){
+        // dd($data);
+        
+        if (Parents::where('father_cnic', '=', $data->parent_cnic)->orwhere('mother_cnic', '=', $data->parent_cnic)->exists()){
             // dd('as');
+      User::create([
+            'name' => $data['student_name'],
+            'email' => $data['student_email'],
+            'password' => Hash::make($data['password']),
+            'role_id' => $data['role_id'],
+        ]);
+
+        $register_user = User::select('*')->where('name' , $data['student_name'])->where('role_id' ,  $data['role_id'])->first();
+         DB::insert('INSERT into role_user(role_id , user_id ) values(? , ?)' , [$register_user->role_id, $register_user->id]);
+                
         $student = new Student();
-        $student->student_name = $request->input('student_name');
-        $student->father_name = $request->input('father_name');
-        $student->parent_cnic = $request->input('parent_cnic');
-        $student->student_email = $request->input('student_email');
-        $student->student_roll_no = $request->input('student_roll_no');
-        $student->student_gender = $request->input('student_gender');
-        $student->student_dob = $request->input('student_dob');
-        $student->student_blood_group = $request->input('student_blood_group');
-        $student->student_nationality = $request->input('student_nationality');
-        $student->student_religion = $request->input('student_religion');
-        $student->student_address = $request->input('student_address');
-        $student->student_phone_number = $request->input('student_phone_number');
-        $student->student_pic_path = $request->input('student_pic_path');
-        $student->student_date_of_admission = $request->input('student_date_of_admission');
-        $student->student_class_of_admission = $request->input('student_class_of_admission');
-        $student->student_class_section = $request->input('student_class_section');
-        $student->student_previous_school = $request->input('student_previous_school');
-        $student->student_disability = $request->input('student_disability');
+        $student->student_name = $data->input('student_name');
+        $student->father_name = $data->input('father_name');
+        $student->parent_cnic = $data->input('parent_cnic');
+        $student->student_email = $data->input('student_email');
+        $student->student_roll_no = $data->input('student_roll_no');
+        $student->student_gender = $data->input('student_gender');
+        $student->student_dob = $data->input('student_dob');
+        $student->student_blood_group = $data->input('student_blood_group');
+        $student->student_nationality = $data->input('student_nationality');
+        $student->student_religion = $data->input('student_religion');
+        $student->student_address = $data->input('student_address');
+        $student->student_phone_number = $data->input('student_phone_number');
+        $student->student_pic_path = $data->input('student_pic_path');
+        $student->student_date_of_admission = $data->input('student_date_of_admission');
+        $student->student_class_of_admission = $data->input('student_class_of_admission');
+        $student->student_class_section = $data->input('student_class_section');
+        $student->student_previous_school = $data->input('student_previous_school');
+        $student->student_disability = $data->input('student_disability');
         $student->save();
         return redirect('/');
         }
@@ -95,16 +110,32 @@ class HRController extends Controller
     public function addemployee(Request $request)
     {
         // dd($request);
+        User::create([
+            'name' => $request['employee_name'],
+            'email' => $request['employee_email'],
+            'password' => Hash::make($request['password']),
+            'role_id' => $request['role_id'],
+        ]);
+
+        $register_user = User::select('*')->where('email' , $request['employee_email'])->where('role_id' ,  $request['role_id'])->first();
+         DB::insert('INSERT into role_user(role_id , user_id ) values(? , ?)' , [$register_user->role_id, $register_user->id]);
+        
         $employee = new Employee();
         $employee->employee_name = $request->input('employee_name');
+        $employee->employee_email = $request->input('employee_email');
         $employee->employee_designation = $request->input('employee_designation');
+        $employee->marital_status = $request->input('marital_status');
         $employee->employee_address = $request->input('employee_address');
         $employee->employee_gender = $request->input('employee_gender');
         $employee->employee_cnic = $request->input('employee_cnic');
         $employee->employee_phone_number = $request->input('employee_phone_number');
         $employee->employee_hireDate = $request->input('employee_hireDate');
         $employee->employee_dob = $request->input('employee_dob');
-        $employee->dept_id = $request->input('department');
+        $employee->branch_id = $request->input('branch_id');
+        $employee->dept_id = $request->input('dept_id');
+        $employee->user_id = $register_user->id;
+        // $employee->dept_id = $request->input('department');
+
         $employee->save();
         return redirect('/');
     }
@@ -112,6 +143,26 @@ class HRController extends Controller
     public function addparent(Request $request)
     {
         // dd($request);
+        User::create([
+            'name' => $request['father_name'],
+            'email' => $request['father_email'],
+            'password' => Hash::make($request['password']),
+            'role_id' => $request['role_id'],
+        ]);
+
+        $father_user = User::select('*')->where('name' , $request['father_name'])->where('role_id' ,  $request['role_id'])->first();
+         DB::insert('INSERT into role_user(role_id , user_id ) values(? , ?)' , [$father_user->role_id, $father_user->id]);
+        
+         User::create([
+            'name' => $request['mother_name'],
+            'email' => $request['mother_email'],
+            'password' => Hash::make($request['password']),
+            'role_id' => $request['role_id'],
+        ]);
+
+        $mother_user = User::select('*')->where('name' , $request['mother_name'])->where('role_id' ,  $request['role_id'])->first();
+        DB::insert('INSERT into role_user(role_id , user_id ) values(? , ?)' , [$mother_user->role_id, $mother_user->id]); 
+        
         $parent = new Parents();
         $parent->father_name = $request->input('father_name');
         $parent->father_email = $request->input('father_email');
@@ -124,8 +175,11 @@ class HRController extends Controller
         $parent->mother_email = $request->input('mother_email');
         $parent->mother_phone_number = $request->input('mother_phone_number');
         $parent->mother_address = $request->input('mother_address');
+        $parent->mother_cnic = $request->input('mother_cnic');
         $parent->mother_occupation = $request->input('mother_occupation');
         $parent->mother_annual_income = $request->input('mother_annual_income');
+        $parent->father_user_id = $father_user->id;
+        $parent->mother_user_id = $mother_user->id;
         $parent->save();
         return redirect('/');
     }
@@ -149,7 +203,7 @@ class HRController extends Controller
             // //     // dd($parent);
             // // }
             $students = DB::table('parents')
-            ->join('students','students.parent_id','=','parents.id')
+            ->join('students','students.parent_id','=','parents.parent_id')
             ->select('parents.*','students.*')
             ->get();
             // dd($students);
@@ -182,7 +236,7 @@ class HRController extends Controller
     {
         if(request()->ajax())
         {
-            $data = Student::where('id' , $id)
+            $data = Student::where('student_id' , $id)
             ->get();
             return $data;
         } 
@@ -195,7 +249,7 @@ class HRController extends Controller
         // dd($id);
         if(request()->ajax())
         {
-            $data = Parents::where('id' , $id)
+            $data = Parents::where('parent_id' , $id)
             ->get();
             // dd($data);
             return $data;
@@ -210,7 +264,7 @@ class HRController extends Controller
     {
         if(request()->ajax())
         {
-            $data = Employee::where('id' , $id)
+            $data = Employee::where('employee_id' , $id)
             ->get();
             return $data;
         } 
@@ -240,7 +294,7 @@ class HRController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::where('id',$id)->get();
+        $student = Student::where('student_id',$id)->get();
         return view('HR.edit_student', compact('student'));
     }
    
@@ -248,13 +302,13 @@ class HRController extends Controller
     public function editemployee($id)
     {
         // dd('as');
-        $employee = Employee::where('id',$id)->get();
+        $employee = Employee::where('employee_id',$id)->get();
         return view('HR.edit_employee', compact('employee'));
     }
 
     public function editparent($id){
         // dd($id);
-        $parent = Parents::where('id', $id)->get();
+        $parent = Parents::where('parent_id', $id)->get();
         // dd($parent);
         return view('HR.edit_parent',compact('parent'));
     }
@@ -268,7 +322,7 @@ class HRController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $student = Student::where('id', $id)->first();
+       $student = Student::where('student_id', $id)->first();
        if($student != null){
         //    dd($request);
             $student->student_name    = $request->student_name;
@@ -298,7 +352,7 @@ class HRController extends Controller
 
     public function updateemployee(Request $request, $id)
     {
-       $employee = Employee::where('id', $id)->first();
+       $employee = Employee::where('employee_id', $id)->first();
        if($employee != null){
         //    dd($request);
             $employee->employee_name    = $request->employee_name;
@@ -318,9 +372,10 @@ class HRController extends Controller
 
     public function updateparent(Request $request, $id)
     {
-       $parent = Parents::where('id', $id)->first();
-       if($parent != null){
-        //    dd($request);
+        // dd('sa');
+        $parent = Parents::where('parent_id', $id)->first();
+        // dd($parent);
+        if($parent != null){
             $parent->father_name         = $request->father_name;
             $parent->father_email        = $request->father_email;
             $parent->father_phone_number = $request->father_phone_number;

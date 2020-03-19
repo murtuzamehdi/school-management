@@ -84,8 +84,8 @@
                         <td class="center hidden-phone">{{$employees->marital_status}}</td>
                         <td class="center hidden-phone">{{$employees->employee_phone_number}}</td>
                         <td>
-                        <button type="submit" class="btn btn-success btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$employees->id}}"><i class=" fa fa-eye"></i></button>
-                          <a href="employee/{{$employees->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a>
+                        <button type="submit" class="btn btn-success btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$employees->employee_id}}"><i class=" fa fa-eye"></i></button>
+                          <a href="employee/{{$employees->employee_id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a>
                             <button class="btn btn-danger btn-xs"><i class=" fa fa-trash-o"></i></button>
                         </td>
                     </tr>

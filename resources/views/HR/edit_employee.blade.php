@@ -31,7 +31,7 @@
                 
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
                 @foreach ($employee as $employees)
-                <form class="form-horizontal style-form" method="POST" action="/employee/{{$employees->id}}" accept-charset="UTF-8" enctype="multipart/form-data">
+                <form class="form-horizontal style-form" method="POST" action="/employee/{{$employees->employee_id}}" accept-charset="UTF-8" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Name</label>

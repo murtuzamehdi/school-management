@@ -31,7 +31,7 @@
               <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
               @foreach ($student as $students)
                   
-              <form class="form-horizontal style-form" method="PUT" action="/student/{{$students->id}}" accept-charset="UTF-8" enctype="multipart/form-data">
+              <form class="form-horizontal style-form" method="PUT" action="/student/{{$students->student_id}}" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Name</label>

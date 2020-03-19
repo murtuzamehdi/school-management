@@ -44,6 +44,26 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Marital Status</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="marital_status">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email" class="col-sm-2 col-sm-2 control-label">{{ __('E-Mail Address') }}</label>
+
+                  <div class="col-sm-10">
+                      <input id="employee_email" type="email" class="form-control @error('email') is-invalid @enderror" name="employee_email" value="{{ old('email') }}" required autocomplete="email">
+                      @error('email')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div>
+              </div>
+
+                <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Address</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" name="employee_address">
@@ -83,12 +103,73 @@
                     <input type="date" class="form-control" name="employee_dob">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Department</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="department">
-                  </div>
+                @php
+                 $branch  = App\Branches::all(); 
+                @endphp
+               <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Branch</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="branch_id">
+                  <option value=""></option>
+                  @foreach ($branch as $item)
+                  <option value="{{$item->branch_id}}">{{$item->branch_name}}</option>
+                  @endforeach
+                    </select>
                 </div>
+              </div>
+                @php
+                 $depart  = App\Department::all(); 
+                @endphp
+               <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Department</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="dept_id">
+                  <option value=""></option>
+                  @foreach ($depart as $department)
+                  <option value="{{$department->dept_id}}">{{$department->dept_name}}</option>
+                  @endforeach
+                    </select>
+                </div>
+              </div>
+                @php
+                //  $userIds = [1, 2, 3, 4];
+                 $role  = DB::table('roles')->where('name','!=', 'Parent')
+                 ->where('name','!=', 'Student')
+                 ->get(); 
+                @endphp
+               <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Role</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="role_id">
+                  <option value=""></option>
+                  @foreach ($role as $roles)
+                  <option value="{{$roles->id}}">{{$roles->name}}</option>
+                  @endforeach
+                    </select>
+                </div>
+              </div>
+                
+                <div class="form-group">
+                  <label for="password" class="col-sm-2 col-sm-2 control-label">{{ __('Password') }}</label>
+
+                  <div class="col-md-10">
+                      <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                      @error('password')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="password-confirm" class="col-sm-2 col-sm-2 control-label">{{ __('Confirm Password') }}</label>
+
+                  <div class="col-md-10">
+                      <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                  </div>
+              </div>
                 <button type="submit" class="btn btn-theme">Submit</button>
               </form>
             </div>
