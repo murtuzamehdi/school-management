@@ -7,6 +7,7 @@ use App\Student;
 use App\Subject;
 use App\Section;
 use App\Classes;
+use App\SubjectTeacher;
 use DB;
 
 class StudentController extends Controller
@@ -197,7 +198,32 @@ class StudentController extends Controller
         ->select('classes.*','subjects.*')
         ->get();
            return view('Classes.add_section', compact('classes'));
-    } 
+    }
+    
+    
+
+    public function assignsubject(){
+        $subjectteacher = DB::table('subject_teachers')
+        ->join('employees','employees.employee_id','=','subject_teachers.teacher_id')
+        ->join('subjects','subjects.subject_id','=','subject_teachers.subject_id')
+        ->select('subject_teachers.*','employees.*','subjects.*')
+        ->get();
+        return view('Classes.assign_subjects', compact('subjectteacher'));
+    }
+
+
+        public function assigned(Request $request){
+        // dd($request);
+        $assigned = new SubjectTeacher();
+        $assigned->subject_id = $request->subject_id;
+        $assigned->teacher_id = $request->teacher_id;
+        $assigned->year = $request->year;
+        $assigned->save();
+        
+        
+    //    return $this->index();
+       return $this->assignsubject();
+    }
 
     /**
      * Display the specified resource.

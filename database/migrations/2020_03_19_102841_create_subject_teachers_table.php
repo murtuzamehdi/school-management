@@ -14,13 +14,17 @@ class CreateSubjectTeachersTable extends Migration
     public function up()
     {
         Schema::create('subject_teachers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('subject_id')->unsigned();
-            $table->foreign('subject_id')->references('subject_id')->on('subjects')->onDelete('cascade');
-            $table->bigInteger('teacher_id')->unsigned();
-            $table->foreign('teacher_id')->references('subject_id')->on('subjects')->onDelete('cascade');
+            $table->engine = 'MyISAM';
+
+            $table->bigInteger('id');
+            $table->bigInteger('subject_id');
+            $table->bigInteger('teacher_id');
+            $table->string('year');
+            $table->primary(['id','subject_id', 'year']);
             $table->timestamps();
         });
+
+        DB::statement('ALTER TABLE subject_teachers MODIFY id INTEGER NOT NULL AUTO_INCREMENT');
     }
 
     /**
