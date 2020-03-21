@@ -42,7 +42,7 @@ class AccountsController extends Controller
     public function feechallan(){
         $class= Classes::all();
         $student=DB::table('students')
-        ->join('classes','classes.id','students.student_class_of_admission')
+        ->join('classes','classes.class_id','students.student_class_of_admission')
         ->select('classes.*','students.*')
         ->get();
         return view('Accounts.feechallan',compact('class','student'));
@@ -63,7 +63,7 @@ class AccountsController extends Controller
 
         $class= Classes::all();
         $student=DB::table('students')
-        ->join('classes','classes.id','students.student_class_of_admission')
+        ->join('classes','classes.class_id','students.student_class_of_admission')
         ->select('classes.*','students.*')
         ->get();
         return view('Accounts.feechallan',compact('class','student'));
@@ -72,7 +72,7 @@ class AccountsController extends Controller
     public function generatechallan(Request $request){
         $class= Classes::all();
         $student=DB::table('students')
-        ->join('classes','classes.id','students.student_class_of_admission')
+        ->join('classes','classes.class_id','students.student_class_of_admission')
         ->select('classes.*','students.*')
         ->where('student_class_of_admission',$request->classes)
         ->get();
@@ -93,7 +93,7 @@ class AccountsController extends Controller
     {
         // $fees = Fee::all();
         $fees = DB::table('classes')
-        ->join('fees','fees.class_id' , '=' , 'classes.id')
+        ->join('fees','fees.class_id' , '=' , 'classes.class_id')
         ->select('classes.*','fees.*')
         ->get();
         // dd($fees);
@@ -104,7 +104,7 @@ class AccountsController extends Controller
 
     public function fetchfees($id){
         $fees = DB::table('classes')
-        ->join('fees','fees.class_id' , '=' , 'classes.id')
+        ->join('fees','fees.class_id' , '=' , 'classes.class_id')
         ->select('classes.*','fees.*')
         ->where('fees.fees_id',$id)
         ->get();

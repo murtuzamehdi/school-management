@@ -40,7 +40,7 @@
                            $class = App\Classes::all();
                         @endphp
                             @foreach ($class as $classes)
-                            <option value="{{$classes->id}}">{{$classes->class_name}}</option>
+                            <option value="{{$classes->class_id}}">{{$classes->class_name}}</option>
                             @endforeach
                       </select>
                   </div>

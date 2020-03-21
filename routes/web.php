@@ -35,7 +35,7 @@ Route::any('employee/{id}', 'HRController@updateemployee');
 
 Route::any('parent/fetchdata/{id}', 'HRController@fetchparent');
 Route::any('parent/{id}/editparent' , 'HRController@editparent');
-Route::any('parent/{id}', 'HRController@updateparent');
+Route::any('/parent/{id}', 'HRController@updateparent');
 
 
 Route::any('/viewstudents', 'HRController@viewstudent');
@@ -54,6 +54,7 @@ Route::any('/feechallan', 'AccountsController@feechallan');
 Route::any('/generatechallan', 'AccountsController@generatechallan');
 Route::any('/generatechallan/bulk', 'AccountsController@bulk');
 
+//================= classes ===============
 Route::resource('/class','StudentController');
 Route::any('/createclass','StudentController@createclass');
 Route::any('classes/fetchdata/{id}', 'StudentController@fetchclasses');
@@ -65,11 +66,27 @@ Route::any('/createsubjects','StudentController@createsubjects');
 Route::any('subject/fetchdata/{id}', 'StudentController@fetchsubject');
 Route::any('/updatesubject', 'StudentController@updatesubject');
 
+//============ Assign Subject =============
+Route::any('/assign','StudentController@assignsubject');
+Route::any('/assigned','StudentController@assigned');
+Route::any('assign/subjectteacher/{id}', 'StudentController@subjectteacher');
+
 // ===================== Section ===========================
 // Route::any('/createsection','StudentController@createsection');
 // Route::any('/section','StudentController@sectionindex');
 // Route::any('section/fetchdata/{id}', 'StudentController@fetchsection');
 // Route::any('/updatesection', 'StudentController@updatesection');
 Auth::routes();
+Route::get('/logout' , function(){
+    Auth::logout();
+    return redirect('/login');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// ============== Teacher ===============
+Route::get('/new_lectures', function () {
+    return view('Teachers.new_lectures');
+});
+Route::resource('/teacher','TeacherController');
+Route::any('/view_lecture','TeacherController@view_lecture');

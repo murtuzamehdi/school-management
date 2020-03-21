@@ -31,6 +31,7 @@
               <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
               <form class="form-horizontal style-form" method="POST" action="/addparent" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
+                <input type="text" name="role_id" value="6" hidden>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Father Name</label>
                   <div class="col-sm-10">
@@ -38,11 +39,17 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Father Email</label>
+                  <label for="email" class="col-sm-2 col-sm-2 control-label">{{ __('Father E-Mail Address') }}</label>
+
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="father_email">
+                      <input id="father_email" type="email" class="form-control @error('email') is-invalid @enderror" name="father_email" value="{{ old('email') }}" required autocomplete="email">
+                      @error('email')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
-                </div>
+              </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Father Phone Number</label>
                   <div class="col-sm-10">
@@ -82,11 +89,17 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Mother Email</label>
+                  <label for="email" class="col-sm-2 col-sm-2 control-label">{{ __('Mother E-Mail Address') }}</label>
+
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="mother_email">
+                      <input id="mother_email" type="email" class="form-control @error('email') is-invalid @enderror" name="mother_email" value="{{ old('email') }}" required autocomplete="email">
+                      @error('email')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
-                </div>
+              </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Mother Phone Number</label>
                   <div class="col-sm-10">
@@ -117,6 +130,27 @@
                     <input type="text" class="form-control" name="mother_annual_income">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="password" class="col-sm-2 col-sm-2 control-label">{{ __('Password') }}</label>
+
+                  <div class="col-md-10">
+                      <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                      @error('password')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="password-confirm" class="col-sm-2 col-sm-2 control-label">{{ __('Confirm Password') }}</label>
+
+                  <div class="col-md-10">
+                      <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                  </div>
+              </div>
                 <button type="submit" class="btn btn-theme">Submit</button>
               </form>
             </div>
