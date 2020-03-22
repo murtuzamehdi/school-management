@@ -90,3 +90,10 @@ Route::get('/new_lectures', function () {
 });
 Route::resource('/teacher','TeacherController');
 Route::any('/view_lecture','TeacherController@view_lecture');
+
+Route::get('/new_homework', function () {
+    return view('Teachers.new_homework');
+});
+Route::any('/homework','TeacherController@createhomework');
+
+Route::any('/markresult', 'TeacherController@markresult');

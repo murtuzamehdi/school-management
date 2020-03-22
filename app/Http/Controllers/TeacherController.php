@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lectures;
+use App\Homework;
+use DB;
 class TeacherController extends Controller
 {
     /**
@@ -25,6 +27,19 @@ class TeacherController extends Controller
     public function create()
     {
         //
+    }
+
+
+    public function markresult()
+    {
+      $result = DB::table('students')
+      ->join('classes','classes.class_id', '=' , 'students.student_class_of_admission')
+      ->join('subjects','subjects.class_id', '=' , 'students.student_class_of_admission')
+      ->join('subject_teachers','subject_teachers.subject_id', '=' , 'subjects.subject_id')
+      ->select('students.*','classes.*','subjects.*','subject_teachers.*')
+      ->get();
+        
+      return view('Teachers.mark_result',compact('result'));
     }
 
     /**
@@ -64,12 +79,33 @@ class TeacherController extends Controller
         return view('Teachers.view_lectures',compact('lectures'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function createhomework(Request $request)
+    {
+        // dd($request);
+        $id = Auth::user()->id;
+        $homework = new Homework();
+        $homework->subject_id = $request->input('subject_id');
+        $homework->user_id = $id;
+        $homework->homework = $request->input('homework');
+        $homework->description = $request->input('description');
+        $homework->start_date = $request->input('start_date');
+        $homework->end_date = $request->input('end_date');
+
+        if($request->hasfile('file_path')){
+            $file = $request->file('file_path');
+            $extension = $file->getClientOriginalExtension(); 
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/homework/' , $filename);
+            $homework->file_path = $filename;
+        }else {
+            $homework->file_path = '';
+        }
+        $homework->save();
+        // dd('as');
+        return redirect()->back();
+    }
+
+    
     public function show($id)
     {
         //

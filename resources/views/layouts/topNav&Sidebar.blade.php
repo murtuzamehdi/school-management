@@ -352,7 +352,7 @@
           <ul class="sub">
             <li><a href="/new_lectures">Add Lectures</a></li>
             <li><a href="/view_lecture">View Lectures</a></li>
-            <li><a href="/viewstudents">Add Home Work</a></li>
+            <li><a href="/new_homework">Add Home Work</a></li>
             <li><a href="/employee">Mark Attendance</a></li>
             {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
             {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
@@ -364,7 +364,7 @@
             <span>Results</span>
             </a>
           <ul class="sub">
-            <li><a href="/setfees">Mark Student Results</a></li>
+            <li><a href="/markresult">Mark Student Results</a></li>
              {{-- <li><a href="gallery.html">Gallery</a></li>
             <li><a href="todo_list.html">Todo List</a></li>
             <li><a href="dropzone.html">Dropzone File Upload</a></li>

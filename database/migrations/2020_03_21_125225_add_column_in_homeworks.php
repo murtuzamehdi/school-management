@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColomnInEmployeesTable extends Migration
+class AddColumnInHomeworks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddColomnInEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::table('employees', function (Blueprint $table) {
-           $table->string('employee_phone_number')->nullable();
+        Schema::table('homeworks', function (Blueprint $table) {
+            $table->string('user_id')->nullable();
+            
         });
     }
 
@@ -25,7 +26,7 @@ class AddColomnInEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::table('employees', function (Blueprint $table) {
+        Schema::table('homeworks', function (Blueprint $table) {
             //
         });
     }
