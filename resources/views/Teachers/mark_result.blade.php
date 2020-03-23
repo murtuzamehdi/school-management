@@ -34,11 +34,17 @@
                       <td>{{$results->subject_name}}</td>
                       <td>{{$results->student_name}}</td>
                       <td>{{$results->year}}</td>
-                      <td><input type="text" name="marks"></td>
-                      <td>
-                      {{-- <button type="submit" class="btn btn-primary btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$subjectteachers->subject_id}}"><i class="fa fa-pencil"></i></button> --}}
-                        {{-- <a href="employee/{{$class->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a> --}}
+                      <form action="/createmarks" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                        @csrf
+                        <td><input type="text" name="marks"></td>
+                        <td>
+                        <input type="hidden" value="{{$results->subject_id}}" name="subject_id">
+                        <input type="hidden" value="{{$results->student_id}}" name="student_id">
+                        <input type="hidden" value="{{$results->year}}" name="year">
+                          {{-- <button type="submit" class="btn btn-primary btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$subjectteachers->subject_id}}"><i class="fa fa-pencil"></i></button> --}}
+                          {{-- <a href="employee/{{$class->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a> --}}
                           <button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button>
+                        </form>
                       </td>
                   </tr>
                   

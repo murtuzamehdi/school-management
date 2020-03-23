@@ -17,7 +17,7 @@ class CreateResultsTable extends Migration
             // $table->bigIncrements('id');
             $table->integer('subject_id');
             $table->string('year');
-            $table->primary(['subject_id', 'year']);
+            // $table->primary(['subject_id', 'year']);
             $table->integer('student_id')->nullable();
             $table->integer('marks')->nullable();
             $table->timestamps();

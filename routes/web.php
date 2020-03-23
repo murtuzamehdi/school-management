@@ -97,3 +97,9 @@ Route::get('/new_homework', function () {
 Route::any('/homework','TeacherController@createhomework');
 
 Route::any('/markresult', 'TeacherController@markresult');
+Route::any('/createmarks', 'TeacherController@createmarks');
+
+//=================== student ===========================
+Route::any('/check_homework','StudentController@homework');
+Route::any('/check_lectures','StudentController@lectures');
+Route::any('/result','StudentController@result');

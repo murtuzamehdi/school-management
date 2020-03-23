@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lectures;
 use App\Homework;
+use App\Result;
 use DB;
 class TeacherController extends Controller
 {
@@ -40,6 +41,18 @@ class TeacherController extends Controller
       ->get();
         
       return view('Teachers.mark_result',compact('result'));
+    }
+
+    public function createmarks(Request $request){
+        // dd($request);
+        $results = new Result();
+        $results->subject_id = $request->subject_id;
+        $results->year = $request->year;
+        $results->student_id = $request->student_id;
+        $results->marks = $request->marks;
+        $results->save();
+
+       return $this->markresult();
     }
 
     /**

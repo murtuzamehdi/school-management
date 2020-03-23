@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Student;
 use App\Subject;
 use App\Section;
@@ -225,12 +226,40 @@ class StudentController extends Controller
        return $this->assignsubject();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function homework(){
+        $home = DB::table('students')
+        ->join('subjects','subjects.class_id', '=' , 'students.student_class_of_admission')
+        ->join('homeworks','homeworks.subject_id' , '=' , 'subjects.subject_id')
+        ->select('students.*','subjects.*','homeworks.*')
+        ->get();
+        
+        return view('students.homework',compact('home'));
+    }
+
+    public function lectures(){
+        $lecture = DB::table('students')
+        ->join('subjects','subjects.class_id', '=' , 'students.student_class_of_admission')
+        ->join('lectures','lectures.subject_id' , '=' , 'subjects.subject_id')
+        ->select('students.*','subjects.*','lectures.*')
+        ->get();
+        
+        return view('students.lecture',compact('lecture'));
+    }
+
+    public function result(){
+        $id = Auth::user()->id;
+        $result = DB::table('results')
+        ->join('subjects','subjects.subject_id', '=' , 'results.subject_id')
+        ->join('students','students.student_id' , '=' , 'results.student_id')
+        ->select('students.*','subjects.*','results.*')
+        ->where('students.user_id',$id)
+        ->get();
+        dd($result);
+        
+        return view('students.lecture',compact('lecture'));
+    }
+
+
     public function show($id)
     {
         //

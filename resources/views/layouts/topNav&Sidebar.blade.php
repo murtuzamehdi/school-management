@@ -373,6 +373,61 @@
           </ul>
         </li>
       </ul>
+
+      {{-- Student --}}
+      @elseif(Auth::user()->role_id == 5)
+      <ul class="sidebar-menu" id="nav-accordion">
+        <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+        <h5 class="centered">Sam Soffes</h5>
+        <li class="mt">
+          <a class="active" href="index.html">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-desktop"></i>
+            <span>Class Activities</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/check_homework">Home Work</a></li>
+            <li><a href="/check_lectures">Lectures</a></li>
+            {{-- <li><a href="/new_homework">Add Home Work</a></li>
+            <li><a href="/employee">Mark Attendance</a></li> --}}
+            {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
+            {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-cogs"></i>
+            <span>Results</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/result">Check Your Result</a></li>
+             {{-- <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="todo_list.html">Todo List</a></li>
+            <li><a href="dropzone.html">Dropzone File Upload</a></li>
+            <li><a href="inline_editor.html">Inline Editor</a></li>
+            <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-cogs"></i>
+            <span>Fee Challan</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/markresult">Generate Fee Challan</a></li>
+             {{-- <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="todo_list.html">Todo List</a></li>
+            <li><a href="dropzone.html">Dropzone File Upload</a></li>
+            <li><a href="inline_editor.html">Inline Editor</a></li>
+            <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
+          </ul>
+        </li>
+      </ul>
       @endif
       <!-- sidebar menu end-->
     </div>
