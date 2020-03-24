@@ -56,7 +56,7 @@ class AccountsController extends Controller
         // dd($count);
         for($i = 0 ; $i < $count ; $i++){
 
-            FeeDetail::create(['student_id' => $data["id"][$i],'due_date' => $data["due_date"] , 'fee_month' => $data["fee_month"] , 'fees_id' => $data["fees_id"], 'current_ammount' => $data["current_ammount"]]);
+            FeeDetail::create(['student_id' => $data["id"][$i],'due_date' => $data["due_date"] , 'fee_month' => $data["fee_month"] , 'fees_id' => $data["fees_id"], 'current_ammount' => $data["current_ammount"],'arrears' => $data["current_ammount"], 'fee_status' => 0]);
              
          }
  

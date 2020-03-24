@@ -254,11 +254,27 @@ class StudentController extends Controller
         ->select('students.*','subjects.*','results.*')
         ->where('students.user_id',$id)
         ->get();
-        dd($result);
+        // dd($result);
         
-        return view('students.lecture',compact('lecture'));
+        return view('students.check_result',compact('result'));
     }
 
+    public function getchallan(){
+        return view('students.get_challan');
+    }
+
+    public function feestatus(){
+        $id = Auth::user()->id;
+        $checkstatus = DB::table('fee_details')
+        ->join('fees','fees.fees_id', '=' , 'fee_details.fees_id')
+        ->join('students','students.student_id', '=' ,'fee_details.student_id')
+        ->select('fee_details.*','fees.*','students.*')
+        ->where('students.user_id',$id)
+        ->get();
+
+        // dd($checkstatus);
+        return view('students.fee_status',compact('checkstatus'));
+    }
 
     public function show($id)
     {

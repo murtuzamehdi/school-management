@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+@include('layouts.header')
+</head>
+
+<body>
+  <section id="container">
+    <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        @include('layouts.topNav&Sidebar')
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <div class="container">
+            <div class="row">
+                <h2>Challan Design for Property tax</h2>	
+                    <div class="table-responsive">
+                        <div class="table-responsive custom_datatable">						
+                            <table class="table table-bordered" style="width:100%;margin:auto;text-align:left;" >
+                                <tbody>										
+                                    <tr>
+                                        <td rowspan="2" colspan="2"><h3 style="margin:8px 0 0 63px;">BANK TITLE HERE</h3></td>
+                                        <td>Challan NO</td>
+                                        <td colspan="2">123456</td>
+                                    </tr>									
+                                    <tr>
+                                        <td>Date</td>  
+                                        <td colspan="2">28/01/2017</td>  											
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Bank Name / Branch : </td>
+                                        <td colspan="3">Bank Name / Branch Name Here</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Tax Period</td>
+                                        <td colspan="3">20_ _ to 20_ _</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Building Owner Name</td>
+                                        <td colspan="1">Ward, Block and Door #, Assessment #,UPI #</td>
+                                        <td width="150">Tax Details</td>
+                                        <td width="50">RS</td>
+                                        <td width="50">00</td>
+                                    </tr>	
+                                    <tr>
+                                        <td rowspan="6">Santhosh Poojary Keyyur</td>
+                                        <td rowspan="6" width="50%">PERLAGURY CROSS ROAD.<br> 3rd Block , Floore #24 <br> Ass 123456, PID -123456	</td>
+                                        <td>Property Tax</td>
+                                        <td>500</td>	
+                                        <td>00</td>
+                                    </tr>
+                                    <tr>	
+                                        <td>CESS%</td>
+                                        <td>120</td>
+                                        <td>00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SWM CESS</td>
+                                        <td>120</td>
+                                        <td>00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adjustment if any</td>
+                                        <td>120</td>
+                                        <td>00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Penalty </td>
+                                        <td>120</td>
+                                        <td>00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>580</td>
+                                        <td>00</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">Amount in words :Five Thousand Eighty Rupees Only</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Depositer Signature</td>
+                                        <td>Account #</td>
+                                        <td>Office Manager signature</td>
+                                        <td colspan="2">Cashier Signature <br><br></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+      <div class="text-center">
+        <p>
+          &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
+        </p>
+        <div class="credits">
+          <!--
+            You are NOT allowed to delete the credit link to TemplateMag with free version.
+            You can delete the credit link only if you bought the pro version.
+            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
+            Licensing information: https://templatemag.com/license/
+          -->
+          Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
+        </div>
+        <a href="blank.html#" class="go-top">
+          <i class="fa fa-angle-up"></i>
+          </a>
+      </div>
+    </footer>
+    <!--footer end-->
+  </section>
+  <!-- js placed at the end of the document so the pages load faster -->
+  @include('layouts.scripts')
+
+</body>
+
+</html>

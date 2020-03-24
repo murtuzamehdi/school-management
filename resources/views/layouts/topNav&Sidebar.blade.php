@@ -212,7 +212,7 @@
   <aside>
     <div id="sidebar" class="nav-collapse ">
       <!-- sidebar menu start-->
-      @if(Auth::user()->role_id == 2)
+      @if(Auth::user()->role_id == 3)
       <ul class="sidebar-menu" id="nav-accordion">
         <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
         <h5 class="centered">Sam Soffes</h5>
@@ -419,7 +419,8 @@
             <span>Fee Challan</span>
             </a>
           <ul class="sub">
-            <li><a href="/markresult">Generate Fee Challan</a></li>
+            <li><a href="/getchallan">Generate Fee Challan</a></li>
+            <li><a href="/status">fee Status</a></li>
              {{-- <li><a href="gallery.html">Gallery</a></li>
             <li><a href="todo_list.html">Todo List</a></li>
             <li><a href="dropzone.html">Dropzone File Upload</a></li>

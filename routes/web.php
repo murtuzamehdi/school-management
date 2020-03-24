@@ -103,3 +103,5 @@ Route::any('/createmarks', 'TeacherController@createmarks');
 Route::any('/check_homework','StudentController@homework');
 Route::any('/check_lectures','StudentController@lectures');
 Route::any('/result','StudentController@result');
+Route::any('/getchallan','StudentController@getchallan');
+Route::any('/status','StudentController@feestatus');
