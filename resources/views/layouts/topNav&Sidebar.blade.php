@@ -353,7 +353,7 @@
             <li><a href="/new_lectures">Add Lectures</a></li>
             <li><a href="/view_lecture">View Lectures</a></li>
             <li><a href="/new_homework">Add Home Work</a></li>
-            <li><a href="/employee">Mark Attendance</a></li>
+            <li><a href="/mark_attendance">Mark Attendance</a></li>
             {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
             {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
           </ul>
@@ -420,7 +420,7 @@
             </a>
           <ul class="sub">
             <li><a href="/getchallan">Generate Fee Challan</a></li>
-            <li><a href="/status">fee Status</a></li>
+            <li><a href="/status">Fee Status</a></li>
              {{-- <li><a href="gallery.html">Gallery</a></li>
             <li><a href="todo_list.html">Todo List</a></li>
             <li><a href="dropzone.html">Dropzone File Upload</a></li>

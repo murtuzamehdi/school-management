@@ -28,68 +28,69 @@
                             <table class="table table-bordered" style="width:100%;margin:auto;text-align:left;" >
                                 <tbody>										
                                     <tr>
-                                        <td rowspan="2" colspan="2"><h3 style="margin:8px 0 0 63px;">BANK TITLE HERE</h3></td>
+                                        <td rowspan="2" colspan="2"><h3 style="margin:8px 0 0 63px;">Happy Palace</h3></td>
                                         <td>Challan NO</td>
                                         <td colspan="2">123456</td>
                                     </tr>									
                                     <tr>
-                                        <td>Date</td>  
-                                        <td colspan="2">28/01/2017</td>  											
+                                    <td>Date</td>  
+                                    <td colspan="2">{{$date}}</td>  											
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <td colspan="2">Bank Name / Branch : </td>
                                         <td colspan="3">Bank Name / Branch Name Here</td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+                                    {{-- <tr>
                                         <td colspan="2">Tax Period</td>
                                         <td colspan="3">20_ _ to 20_ _</td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
-                                        <td>Building Owner Name</td>
-                                        <td colspan="1">Ward, Block and Door #, Assessment #,UPI #</td>
-                                        <td width="150">Tax Details</td>
-                                        <td width="50">RS</td>
-                                        <td width="50">00</td>
+                                        <td>Name</td>
+                                    <td colspan="1">{{$genrateslip[0]->student_name}}</td>
+                                        <td width="150">Due-Date</td>
+                                        <td colspan="2">{{$genrateslip[0]->due_date}}</td>
+                                        {{-- <td width="50">RS</td> --}}
+                                        {{-- <td width="50">00</td> --}}
                                     </tr>	
                                     <tr>
                                         <td rowspan="6">Santhosh Poojary Keyyur</td>
                                         <td rowspan="6" width="50%">PERLAGURY CROSS ROAD.<br> 3rd Block , Floore #24 <br> Ass 123456, PID -123456	</td>
-                                        <td>Property Tax</td>
-                                        <td>500</td>	
-                                        <td>00</td>
+                                        <td>Annual Charges</td>
+                                        <td colspan="2">{{$genrateslip[0]->annual_charges}}</td>	
+                                        {{-- <td>00</td> --}}
                                     </tr>
                                     <tr>	
-                                        <td>CESS%</td>
-                                        <td>120</td>
-                                        <td>00</td>
+                                        <td>Lab Charges</td>
+                                        <td colspan="2">{{$genrateslip[0]->lab}}</td>
+                                        {{-- <td>00</td> --}}
                                     </tr>
                                     <tr>
-                                        <td>SWM CESS</td>
-                                        <td>120</td>
-                                        <td>00</td>
+                                        <td>Tution Fees</td>
+                                        <td colspan="2">{{$genrateslip[0]->tution_fee}}</td>
+                                        {{-- <td>00</td> --}}
                                     </tr>
                                     <tr>
-                                        <td>Adjustment if any</td>
-                                        <td>120</td>
-                                        <td>00</td>
+                                        <td>Arrears</td>
+                                        <td>-</td>
+                                        <td>-</td>
                                     </tr>
                                     <tr>
-                                        <td>Penalty </td>
-                                        <td>120</td>
-                                        <td>00</td>
+                                        <td>Year </td>
+                                        <td colspan="2">{{$genrateslip[0]->year}}</td>
+                                        {{-- <td>00</td> --}}
                                     </tr>
                                     <tr>
                                         <td>Total</td>
-                                        <td>580</td>
-                                        <td>00</td>
+                                        <td colspan="2">{{$genrateslip[0]->amount}}</td>
+                                        {{-- <td>00</td> --}}
                                     </tr>
                                     <tr>
-                                        <td colspan="5">Amount in words :Five Thousand Eighty Rupees Only</td>
+                                    <td colspan="5">Amount in words : {{$amountinwords}} only</td>
                                     </tr>
                                     <tr>
-                                        <td>Depositer Signature</td>
+                                        <td>Signature</td>
                                         <td>Account #</td>
-                                        <td>Office Manager signature</td>
+                                        <td>Principle signature</td>
                                         <td colspan="2">Cashier Signature <br><br></td>
                                     </tr>
                                 </tbody>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use NumberToWords\NumberToWords;
+use Carbon\Carbon;
 use App\Student;
 use App\Subject;
 use App\Section;
@@ -260,7 +262,21 @@ class StudentController extends Controller
     }
 
     public function getchallan(){
-        return view('students.get_challan');
+        $date = Carbon::now()->format('yy-m-d');
+        // dd($date);
+        $numberToWords = new NumberToWords();
+        $id = Auth::user()->id;
+        $genrateslip = DB::table('fee_details')
+        ->join('fees','fees.fees_id', '=' , 'fee_details.fees_id')
+        ->join('students','students.student_id', '=' ,'fee_details.student_id')
+        ->select('fee_details.*','fees.*','students.*')
+        ->where('students.user_id',$id)
+        ->get();
+        // dd($genrateslip->current_ammount);
+        // dd($genrateslip[0]->current_ammount);
+        $numberTransformer = $numberToWords->getNumberTransformer('en');
+       $amountinwords = $numberTransformer->toWords($genrateslip[0]->current_ammount);
+        return view('students.get_challan',compact('date','genrateslip','amountinwords'));
     }
 
     public function feestatus(){
