@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\StudentAttendance;
 use App\Lectures;
 use App\Homework;
 use App\Result;
@@ -27,7 +29,50 @@ class TeacherController extends Controller
      */
     public function markattendance()
     {
-        return view('Teachers.mark_attendance');
+        $id = Auth::user()->id;
+        $students = DB::table('subject_teachers')
+        ->join('subjects','subjects.subject_id', '=' ,'subject_teachers.subject_id')
+        ->join('students','students.student_class_of_admission', '=' ,'subjects.class_id')
+        ->join('employees','employees.employee_id', '=' ,'subject_teachers.teacher_id')
+        ->join('classes','classes.class_id', '=' , 'subjects.class_id')
+        ->select('subject_teachers.*','subjects.*','students.*','employees.*','classes.*')
+        ->where('employees.user_id',$id)
+        ->get();
+        // dd($students);
+        return view('Teachers.mark_attendance',compact('students'));
+    }
+
+
+    public function saveattendance(Request $request)
+    {
+        $teacher_id = Auth::user()->id;
+        // dd($request);
+        $data = $request->all();
+        $count = count($data["student_id"]);
+        $now = Carbon::now();
+        $date =$now->format('Y-m-d');
+        // dd($date);
+        $att = DB::table('student_attendances')
+        ->where('student_id',  $request->student_id[1]) 
+        // ->where('dept_id',  $request->dept_id[1])
+         ->where('date',  $date)->get();
+
+        if($att->isEmpty()){
+            // dd('asdsad');
+        for($i = 1 ; $i <= $count ; $i++){
+            $date = $now->toDateString();
+            $done = StudentAttendance::create(['student_id' => $data["student_id"][$i], 'status' => $data["status"][$i],'date' => $date, 'class_id' => $data["class_id"][$i], 'roll_no' => $data["student_roll_no"][$i],'teacher_id' => $teacher_id ]);
+        }
+        toastr()->success('Attendance marked succesfully');
+    }
+    else{
+        // dd('asd');
+        toastr()->warning('Attendance already taken');
+        // return redirect()->back();
+    }
+        return redirect()->back();
+
+        // return view('Teachers.mark_attendance');
     }
 
 

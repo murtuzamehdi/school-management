@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
-@include('layouts.header')
-
+<head>
+  @include('layouts.header')
+  @toastr_css
+</head>
 <body>
   <section id="container">
     <!-- **********************************************************************************************************************************************************
@@ -22,13 +23,13 @@
             <div style="overflow:scroll;" class="site-wrap">
               <table style="margin-bottom:5%;" class="animated slideInUp" id="customers">
                 <tr>
-                  <th>Department</th>
-                  <th>Shift</th>
+                  <th>Section</th>
+                  <th>{{$students[0]->section}}</th>
                 </tr>
           
                 <tr>
-                  <td>QA</td>
-                  <td>Evening</td>
+                  <td>Class</td>
+                <td>{{$students[0]->class_name}}</td>
                 </tr>
               </table>
           
@@ -44,14 +45,14 @@
                   
                   <form method='post' action="/attendance/save_attendance" accept-charset="UTF-8" class="myForm">
                   {{csrf_field()}}  
-                  {{-- @foreach($agents as $agent) --}}
+                  @foreach($students as $student)
                     <fieldset id="group_Murtuza Mehdi">
                       <tr>
                         <td>
-                          <label class="name" name="name[{{$a}}]">Murtuza Mehdi</label>
-                          {{-- <input type="hidden" value="{{$agent->name}}" name="agent_name[{{$a}}]">
-                          <input type="hidden" value="{{$agent->shift_id}}" name="shift_id[{{$a}}]">
-                          <input type="hidden" value="{{$agent->dept_id}}" name="dept_id[{{$a}}]"> --}}
+                          <label class="name" name="name[{{$a}}]">{{$student->student_name}}</label>
+                          <input type="hidden" value="{{$student->student_id}}" name="student_id[{{$a}}]">
+                          <input type="hidden" value="{{$student->class_id}}" name="class_id[{{$a}}]">
+                          <input type="hidden" value="{{$student->student_roll_no}}" name="student_roll_no[{{$a}}]">
                         </td>
                         
                         <td>
@@ -73,7 +74,7 @@
                         @php
                           $a++;
                         @endphp
-                  {{-- @endforeach --}}
+                  @endforeach
                   </table>
           
                   <button style="background-color:#81a433;margin-left:45%;margin-top:5%;border-style:none;" name="save" type="submit" class="btn btn-primary sava_attendance">Save</button>
@@ -117,7 +118,9 @@
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   @include('layouts.scripts')
-
+  @jquery
+  @toastr_js
+  @toastr_render
 </body>
 
 </html>
