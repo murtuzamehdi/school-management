@@ -55,25 +55,54 @@ class TeacherController extends Controller
         $att = DB::table('student_attendances')
         ->where('student_id',  $request->student_id[1]) 
         // ->where('dept_id',  $request->dept_id[1])
-         ->where('date',  $date)->get();
-
+        ->where('date',  $date)->get();
+        
         if($att->isEmpty()){
             // dd('asdsad');
-        for($i = 1 ; $i <= $count ; $i++){
-            $date = $now->toDateString();
-            $done = StudentAttendance::create(['student_id' => $data["student_id"][$i], 'status' => $data["status"][$i],'date' => $date, 'class_id' => $data["class_id"][$i], 'roll_no' => $data["student_roll_no"][$i],'teacher_id' => $teacher_id ]);
+            for($i = 1 ; $i <= $count ; $i++){
+                $date = $now->toDateString();
+                $done = StudentAttendance::create(['student_id' => $data["student_id"][$i], 'status' => $data["status"][$i],'date' => $date, 'class_id' => $data["class_id"][$i], 'roll_no' => $data["student_roll_no"][$i],'teacher_id' => $teacher_id ]);
+            }
+            toastr()->success('Attendance marked succesfully');
         }
-        toastr()->success('Attendance marked succesfully');
-    }
-    else{
-        // dd('asd');
-        toastr()->warning('Attendance already taken');
-        // return redirect()->back();
-    }
+        else{
+            // dd('asd');
+            toastr()->warning('Attendance already taken');
+            // return redirect()->back();
+        }
         return redirect()->back();
-
+        
         // return view('Teachers.mark_attendance');
     }
+    
+    public function show()
+        {
+            $teacher_id = Auth::user()->id;
+            
+            $data = DB::table('student_attendances')
+            ->where('teacher_id' , $teacher_id)
+            ->distinct()->get(['date', 'class_id']);
+            return view('Teachers.view_attendance', compact('data'));
+        }
+        
+    public function edit(Request $request)
+        {
+            $records = StudentAttendance::select('*')
+            ->where('date',$request->date)
+            ->where('class_id',$request->class_id)
+            // ->where('dept_id',$request->dept_id)
+            ->orderBy('date' , 'asc')
+            ->get();
+            
+            foreach($records as $s){
+                $students = DB::table('students')
+                ->where('student_id',$s->student_id)
+                ->get();
+            }
+            // dd($students);
+            return view('Teachers.edit_attendance', compact('students','records'));
+        }
+
 
 
     public function markresult()
@@ -164,10 +193,6 @@ class TeacherController extends Controller
     }
 
     
-    public function show()
-    {
-        return view('Teachers.view_attendance');
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -175,10 +200,6 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

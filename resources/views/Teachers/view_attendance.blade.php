@@ -20,27 +20,29 @@
             <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
               <thead>
                 <tr>
-                  <th>Subject</th>
-                  <th>Student</th>
-                  <th>Year</th>
+                  <th>Date</th>
+                  <th>Class</th>
+                  {{-- <th>Action</th> --}}
                   {{-- <th>Obtain Marks</th> --}}
                   <th class="hidden-phone">Action</th>
                 </tr>
               </thead>
               <tbody>
-                  {{-- @foreach ($result as $results) --}}
+                  @foreach ($data as $d)
                       
                   <tr class="gradeX">
-                      <td>ds</td>
-                      <td>asd</td>
-                      <td>asd</td>
+                      <td>{{$d->date}}</td>
+                      @php
+                          $class = \App\Classes::all()->where('class_id' , $d->class_id)->first();
+                      @endphp
+                      <td>{{$class->class_name}}</td>
                       <form action="/attendance/edit" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
                         {{-- <td><input type="text" name="marks"></td> --}}
                         <td>
-                        {{-- <input type="hidden" value="{{$results->subject_id}}" name="subject_id">
-                        <input type="hidden" value="{{$results->student_id}}" name="student_id">
-                        <input type="hidden" value="{{$results->year}}" name="year"> --}}
+                        <input type="hidden" value="{{$d->date}}" name="date">
+                        <input type="hidden" value="{{$d->class_id}}" name="class_id">
+                        {{-- <input type="hidden" value="{{$d->student_id}}" name="student_id"> --}}
                           {{-- <button type="submit" class="btn btn-primary btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$subjectteachers->subject_id}}"><i class="fa fa-pencil"></i></button> --}}
                           {{-- <a href="employee/{{$class->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a> --}}
                           <button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button>
@@ -48,7 +50,7 @@
                       </td>
                   </tr>
                   
-                  {{-- @endforeach --}}
+                  @endforeach
               </tbody>
             </table>
           </div>
