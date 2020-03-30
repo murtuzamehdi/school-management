@@ -46,8 +46,8 @@ class TeacherController extends Controller
     public function saveattendance(Request $request)
     {
         $teacher_id = Auth::user()->id;
-        // dd($request);
         $data = $request->all();
+        // dd($data["student_roll_no"]);
         $count = count($data["student_id"]);
         $now = Carbon::now();
         $date =$now->format('Y-m-d');
@@ -164,9 +164,9 @@ class TeacherController extends Controller
     }
 
     
-    public function show($id)
+    public function show()
     {
-        //
+        return view('Teachers.view_attendance');
     }
 
     /**

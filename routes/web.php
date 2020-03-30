@@ -100,6 +100,9 @@ Route::any('/markresult', 'TeacherController@markresult');
 Route::any('/createmarks', 'TeacherController@createmarks');
 Route::any('/mark_attendance', 'TeacherController@markattendance');
 Route::any('/attendance/save_attendance', 'TeacherController@saveattendance');
+Route::any('/attendance/view_attendance', 'TeacherController@show');
+Route::any('/attendance/edit', 'TeacherController@edit');
+Route::any('/attendance/update', 'TeacherController@update');
 
 //=================== student ===========================
 Route::any('/check_homework','StudentController@homework');

@@ -11,6 +11,8 @@ class StudentAttendance extends Model
         'date',
         'teacher_id',
         'status',
+        'class_id',
+        'roll_no',
         'remarks',
     ];
 }

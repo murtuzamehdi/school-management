@@ -353,8 +353,19 @@
             <li><a href="/new_lectures">Add Lectures</a></li>
             <li><a href="/view_lecture">View Lectures</a></li>
             <li><a href="/new_homework">Add Home Work</a></li>
-            <li><a href="/mark_attendance">Mark Attendance</a></li>
+            {{-- <li><a href="/mark_attendance">Mark Attendance</a></li> --}}
             {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
+            {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-desktop"></i>
+            <span>Attendance</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/mark_attendance">Mark Attendance</a></li>
+            <li><a href="/attendance/view_attendance">View Attendance</a></li>
             {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
           </ul>
         </li>
