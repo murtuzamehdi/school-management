@@ -23,16 +23,16 @@
             <div style="overflow:scroll;" class="site-wrap">
               <table style="margin-bottom:5%;" class="animated slideInUp" id="customers">
                 <tr>
-                @php
+                {{-- @php
                     $classname = DB::table('classes')->where('class_id' , $records[0]->class_id )->first();
-                @endphp
+                @endphp --}}
                   <th>Section</th>
-                  <th>{{$classname->section}}</th>
+                  <th>{{$students[0]->section}}</th>
                 </tr>
           
                 <tr>
                   <td>Class</td>
-                <td>{{$classname->class_name}}</td>
+                <td>{{$students[0]->class_name}}</td>
                 </tr>
               </table>
           
@@ -48,28 +48,28 @@
                   
                   <form method='post' action="/attendance/update" accept-charset="UTF-8" class="myForm">
                   {{csrf_field()}}  
-                  @foreach ($records as $re)
+                  {{-- @foreach ($records as $re) --}}
                   @foreach($students as $student)
                         
                     <fieldset id="group_Murtuza Mehdi">
                         <tr>
                             <td>
                                 <label class="name" name="name[{{$a}}]">{{$student->student_name}}</label>
-                                <input type="hidden" value="{{$re->student_id}}" name="student_id[{{$a}}]">
-                                <input type="hidden" value="{{$re->class_id}}" name="class_id[{{$a}}]">
-                                <input type="hidden" value="{{$re->student_roll_no}}" name="student_roll_no[{{$a}}]">
+                                <input type="hidden" value="{{$student->student_id}}" name="student_id[{{$a}}]">
+                                <input type="hidden" value="{{$student->class_id}}" name="class_id[{{$a}}]">
+                                <input type="hidden" value="{{$student->student_roll_no}}" name="student_roll_no[{{$a}}]">
                             </td>
                             
                             <td>
                                 <div class="container">
                                     <div class="form-check">
                                         <label class="form-check-label" for="radio1">
-                                            <input type="radio" class="radio_btn form-check-input" name="status[{{$a}}]" value="present" checked>Present
+                                            <input type="radio" class="radio_btn form-check-input" name="status[{{$a}}]" value="present" {{ $student->status == 'present' ? 'checked' : '' }}>Present
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="radio2">
-                                            <input type="radio" class="radio_btn form-check-input" name="status[{{$a}}]" value="absent">Absent
+                                            <input type="radio" class="radio_btn form-check-input" name="status[{{$a}}]" value="absent" {{ $student->status == 'absent' ? 'checked' : '' }}>Absent
                                         </label>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                           $a++;
                           @endphp
                   @endforeach
-                  @endforeach
+                  {{-- @endforeach --}}
                   </table>
           
                   <button style="background-color:#81a433;margin-left:45%;margin-top:5%;border-style:none;" name="save" type="submit" class="btn btn-primary sava_attendance">Save</button>

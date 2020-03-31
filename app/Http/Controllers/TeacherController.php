@@ -87,24 +87,50 @@ class TeacherController extends Controller
         
     public function edit(Request $request)
         {
-            $records = StudentAttendance::select('*')
-            ->where('date',$request->date)
-            ->where('class_id',$request->class_id)
-            // ->where('dept_id',$request->dept_id)
-            ->orderBy('date' , 'asc')
-            ->get();
             
-            foreach($records as $s){
-                $students = DB::table('students')
-                ->where('student_id',$s->student_id)
-                ->get();
-            }
+            $students = DB::table('student_attendances')
+            ->join('classes','classes.class_id', '=' , 'student_attendances.class_id')
+            ->join('students','students.student_id', '=' , 'student_attendances.student_id')
+            ->select('student_attendances.*','classes.*','students.*')
+            ->where('student_attendances.date',$request->date)
+            ->where('student_attendances.class_id',$request->class_id)
+            ->get();
             // dd($students);
-            return view('Teachers.edit_attendance', compact('students','records'));
+
+            // $records = StudentAttendance::select('*')
+            // ->where('date',$request->date)
+            // ->where('class_id',$request->class_id)
+            // // ->where('dept_id',$request->dept_id)
+            // ->orderBy('date' , 'asc')
+            // ->get();
+            
+            // foreach($records as $s){
+                //     $students = DB::table('students')
+                //     ->where('student_id',$s->student_id)
+                //     ->get();
+                // }
+                // dd($students);
+                return view('Teachers.edit_attendance', compact('students'));
         }
 
-
-
+        
+        public function update(Request $request)
+        {
+            $data = $request->all();
+            // dd($data['agent_name']);
+            $count = count($data["student_id"]);
+            $now = Carbon::now();
+            for($i = 1 ; $i <= $count ; $i++){
+                $date = $now->toDateString();
+                $attendee = StudentAttendance::all()->where('student_id' , $data['student_id'][$i])->first();
+                $attendee->status = $data['status'][$i];
+                // $attendee->comments = $data['comments'][$i];
+                $attendee->save();
+            }
+        
+        return redirect('/');
+    }
+        
     public function markresult()
     {
       $result = DB::table('students')
@@ -208,10 +234,6 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

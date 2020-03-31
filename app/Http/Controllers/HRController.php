@@ -66,19 +66,20 @@ class HRController extends Controller
     protected function addstudent(Request $data)
     {
         // dd($data);
-        
+        // dd($parent_id->parent_id);
         if (Parents::where('father_cnic', '=', $data->parent_cnic)->orwhere('mother_cnic', '=', $data->parent_cnic)->exists()){
             // dd('as');
-      User::create([
-            'name' => $data['student_name'],
-            'email' => $data['student_email'],
-            'password' => Hash::make($data['password']),
-            'role_id' => $data['role_id'],
-        ]);
-
-        $register_user = User::select('*')->where('name' , $data['student_name'])->where('role_id' ,  $data['role_id'])->first();
-         DB::insert('INSERT into role_user(role_id , user_id ) values(? , ?)' , [$register_user->role_id, $register_user->id]);
+            User::create([
+                'name' => $data['student_name'],
+                'email' => $data['student_email'],
+                'password' => Hash::make($data['password']),
+                'role_id' => $data['role_id'],
+                ]);
                 
+                $register_user = User::select('*')->where('name' , $data['student_name'])->where('role_id' ,  $data['role_id'])->first();
+                DB::insert('INSERT into role_user(role_id , user_id ) values(? , ?)' , [$register_user->role_id, $register_user->id]);
+                
+        $parent_id = Parents::where('father_cnic', '=', $data->parent_cnic)->orwhere('mother_cnic', '=', $data->parent_cnic)->first();
         $student = new Student();
         $student->student_name = $data->input('student_name');
         $student->father_name = $data->input('father_name');
@@ -98,6 +99,8 @@ class HRController extends Controller
         $student->student_class_section = $data->input('student_class_section');
         $student->student_previous_school = $data->input('student_previous_school');
         $student->student_disability = $data->input('student_disability');
+        $student->user_id = $register_user->id;
+        $student->parent_id = $parent_id->parent_id;
         $student->save();
         return redirect('/');
         }
