@@ -12,6 +12,7 @@ use App\Section;
 use App\Classes;
 use App\SubjectTeacher;
 use DB;
+use PDF;
 
 class StudentController extends Controller
 {
@@ -277,6 +278,41 @@ class StudentController extends Controller
         $numberTransformer = $numberToWords->getNumberTransformer('en');
        $amountinwords = $numberTransformer->toWords($genrateslip[0]->current_ammount);
         return view('students.get_challan',compact('date','genrateslip','amountinwords'));
+    }
+
+    public function pdfview(Request $request)
+    {
+        $date = Carbon::now()->format('yy-m-d');
+        // dd($date);
+        $numberToWords = new NumberToWords();
+        $id = Auth::user()->id;
+        $genrateslip = DB::table('fee_details')
+        ->join('fees','fees.fees_id', '=' , 'fee_details.fees_id')
+        ->join('students','students.student_id', '=' ,'fee_details.student_id')
+        ->select('fee_details.*','fees.*','students.*')
+        ->where('students.user_id',$id)
+        ->get();
+        // dd($genrateslip->current_ammount);
+        // dd($genrateslip[0]->current_ammount);
+        $numberTransformer = $numberToWords->getNumberTransformer('en');
+       $amountinwords = $numberTransformer->toWords($genrateslip[0]->current_ammount);
+    //    view('students.pdfview',compact('date','genrateslip','amountinwords'));
+       view()->share('date',$date);
+       view()->share('amountinwords',$amountinwords);
+       view()->share('genrateslip',$genrateslip);
+    //    view()->share('date',$date);
+        // dd('asd');
+        // $items = DB::table("items")->get();
+        // view()->share('items',$items);
+
+
+        if($request->has('download')){
+            // dd('ads');
+            $pdf = PDF::loadView('students.pdfview');
+            return $pdf->download('pdfview.pdf');
+        }
+
+        return view('students.pdfview');
     }
 
     public function feestatus(){

@@ -123,6 +123,7 @@ class TeacherController extends Controller
             for($i = 1 ; $i <= $count ; $i++){
                 $date = $now->toDateString();
                 $attendee = StudentAttendance::all()->where('student_id' , $data['student_id'][$i])->first();
+                dd($attendee);
                 $attendee->status = $data['status'][$i];
                 // $attendee->comments = $data['comments'][$i];
                 $attendee->save();

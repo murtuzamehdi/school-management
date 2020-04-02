@@ -247,6 +247,7 @@
             <li><a href="/setfees">Set Fees Structure</a></li>
            <li><a href="/viewfees">View Fees Structure</a></li>
            <li><a href="/feechallan">Generate Fee Challan</a></li>
+           <li><a href="/paymenthistory">Payment History</a></li>
              {{-- <li><a href="gallery.html">Gallery</a></li>
             <li><a href="todo_list.html">Todo List</a></li>
             <li><a href="dropzone.html">Dropzone File Upload</a></li>

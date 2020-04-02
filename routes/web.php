@@ -53,6 +53,7 @@ Route::any('/fees', 'AccountsController@updatefees');
 Route::any('/feechallan', 'AccountsController@feechallan');
 Route::any('/generatechallan', 'AccountsController@generatechallan');
 Route::any('/generatechallan/bulk', 'AccountsController@bulk');
+Route::any('/paymenthistory','AccountsController@paymenthistory');
 
 //================= classes ===============
 Route::resource('/class','StudentController');
@@ -110,3 +111,5 @@ Route::any('/check_lectures','StudentController@lectures');
 Route::any('/result','StudentController@result');
 Route::any('/getchallan','StudentController@getchallan');
 Route::any('/status','StudentController@feestatus');
+
+Route::get('pdfview',array('as'=>'pdfview','uses'=>'StudentController@pdfview'));

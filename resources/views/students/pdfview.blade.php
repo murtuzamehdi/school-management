@@ -5,7 +5,6 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-@include('layouts.header')
 </head>
 
 <body>
@@ -13,7 +12,7 @@
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
         *********************************************************************************************************************************************************** -->
-        @include('layouts.topNav&Sidebar')
+        
     <!--sidebar end-->
     <!-- **********************************************************************************************************************************************************
         MAIN CONTENT
@@ -22,12 +21,13 @@
     <section id="main-content">
         <div class="container">
             <div class="row">
-                <h2>Challan Design for Property tax</h2>	
+                <h2>Challan</h2>	
                     <div class="table-responsive">
                         <div class="table-responsive custom_datatable">						
                             <table class="table table-bordered" style="width:100%;margin:auto;text-align:left;" >
-                                <tbody>			
-                                    <a href="{{ route('pdfview',['download'=>'pdf']) }}">Download PDF</a>							
+                                <tbody>		
+                                    {{-- <a href="{{ route('pdfview',['download'=>'pdf']) }}">Download PDF</a> --}}
+								
                                     <tr>
                                         <td rowspan="2" colspan="2"><h3 style="margin:8px 0 0 63px;">Happy Palace</h3></td>
                                         <td>Challan NO</td>

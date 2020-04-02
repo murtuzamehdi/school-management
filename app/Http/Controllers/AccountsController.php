@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Fee;
 use App\Classes;
 use App\Student;
@@ -82,6 +83,19 @@ class AccountsController extends Controller
         ->get();
         // dd($fees,$student);
         return view('Accounts.generatechallan',compact('fees','student','class'));
+    }
+
+    public function paymenthistory(){
+        $id = Auth::user()->id;
+        $checkstatus = DB::table('fee_details')
+        ->join('fees','fees.fees_id', '=' , 'fee_details.fees_id')
+        ->join('students','students.student_id', '=' ,'fee_details.student_id')
+        ->select('fee_details.*','fees.*','students.*')
+        // ->where('students.user_id',$id)
+        ->get();
+
+        // dd($checkstatus);
+        return view('Accounts.paymenthistory',compact('checkstatus'));
     }
 
     /**
