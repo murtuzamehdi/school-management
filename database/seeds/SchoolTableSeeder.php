@@ -27,6 +27,18 @@ class SchoolTableSeeder extends Seeder
             'dept_name' => ('Accounts'),
         ]);
 
+        DB::table('departments')->insert([
+            'dept_name' => ('Examination'),
+        ]);
+
+        // DB::table('departments')->insert([
+        //     'dept_name' => ('Accounts'),
+        // ]);
+
+        // DB::table('departments')->insert([
+        //     'dept_name' => ('Accounts'),
+        // ]);
+
         // ROLEES
 
         DB::table('roles')->insert([
@@ -47,5 +59,21 @@ class SchoolTableSeeder extends Seeder
         DB::table('roles')->insert([
             'name' => ('Parent'),
         ]);
+
+        DB::table('roles')->insert([
+            'name' => ('Examination'),
+        ]);
+
+        // DB::table('roles')->insert([
+        //     'name' => ('Parent'),
+        // ]);
+
+        // DB::table('roles')->insert([
+        //     'name' => ('Parent'),
+        // ]);
+
+        // DB::table('roles')->insert([
+        //     'name' => ('Parent'),
+        // ]);
     }
 }

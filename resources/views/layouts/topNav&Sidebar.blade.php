@@ -213,7 +213,7 @@
     <div id="sidebar" class="nav-collapse ">
       <!-- sidebar menu start-->
       @if(Auth::user()->role_id == 3)
-      <ul class="sidebar-menu" id="nav-accordion">
+      <ul  class="sidebar-menu" id="nav-accordion">
         <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
         <h5 class="centered">Sam Soffes</h5>
         <li class="mt">
@@ -273,64 +273,6 @@
             <li><a href="404.html">404 Error</a></li>
             <li><a href="500.html">500 Error</a></li> --}}
           </ul>
-        </li>
-        <li class="sub-menu">
-          <a href="javascript:;">
-            <i class="fa fa-tasks"></i>
-            <span>Forms</span>
-            </a>
-          <ul class="sub">
-            <li><a href="form_component.html">Form Components</a></li>
-            <li><a href="advanced_form_components.html">Advanced Components</a></li>
-            <li><a href="form_validation.html">Form Validation</a></li>
-            <li><a href="contactform.html">Contact Form</a></li>
-          </ul>
-        </li>
-        <li class="sub-menu">
-          <a href="javascript:;">
-            <i class="fa fa-th"></i>
-            <span>Data Tables</span>
-            </a>
-          <ul class="sub">
-            <li><a href="basic_table.html">Basic Table</a></li>
-            <li><a href="responsive_table.html">Responsive Table</a></li>
-            <li><a href="advanced_table.html">Advanced Table</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="inbox.html">
-            <i class="fa fa-envelope"></i>
-            <span>Mail </span>
-            <span class="label label-theme pull-right mail-info">2</span>
-            </a>
-        </li>
-        <li class="sub-menu">
-          <a href="javascript:;">
-            <i class=" fa fa-bar-chart-o"></i>
-            <span>Charts</span>
-            </a>
-          <ul class="sub">
-            <li><a href="morris.html">Morris</a></li>
-            <li><a href="chartjs.html">Chartjs</a></li>
-            <li><a href="flot_chart.html">Flot Charts</a></li>
-            <li><a href="xchart.html">xChart</a></li>
-          </ul>
-        </li>
-        <li class="sub-menu">
-          <a href="javascript:;">
-            <i class="fa fa-comments-o"></i>
-            <span>Chat Room</span>
-            </a>
-          <ul class="sub">
-            <li><a href="lobby.html">Lobby</a></li>
-            <li><a href="chat_room.html"> Chat Room</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="google_maps.html">
-            <i class="fa fa-map-marker"></i>
-            <span>Google Maps </span>
-            </a>
         </li>
       </ul>
 
@@ -433,6 +375,210 @@
           <ul class="sub">
             <li><a href="/getchallan">Generate Fee Challan</a></li>
             <li><a href="/status">Fee Status</a></li>
+             {{-- <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="todo_list.html">Todo List</a></li>
+            <li><a href="dropzone.html">Dropzone File Upload</a></li>
+            <li><a href="inline_editor.html">Inline Editor</a></li>
+            <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
+          </ul>
+        </li>
+      </ul>
+
+
+       {{-- Examination --}}
+       @elseif(Auth::user()->role_id == 7)
+       <ul class="sidebar-menu" id="nav-accordion">
+         <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+         <h5 class="centered">Sam Soffes</h5>
+         <li class="mt">
+           <a class="active" href="index.html">
+             <i class="fa fa-dashboard"></i>
+             <span>Dashboard</span>
+             </a>
+         </li>
+         <li class="sub-menu">
+           <a href="javascript:;">
+             <i class="fa fa-desktop"></i>
+             <span>Announcements</span>
+             </a>
+           <ul class="sub">
+             <li><a href="/exam_timetable">Create Exams Time Table</a></li>
+             <li><a href="/syllabus">Create Syllabus</a></li>
+             <li><a href="/announceresult">Make Report Card</a></li>
+             {{-- <li><a href="/employee">Mark Attendance</a></li> --}}
+             {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
+             {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
+           </ul>
+         </li>
+         <li class="sub-menu">
+           <a href="javascript:;">
+             <i class="fa fa-cogs"></i>
+             <span>Results</span>
+             </a>
+           <ul class="sub">
+             <li><a href="/result">Check Your Result</a></li>
+              {{-- <li><a href="gallery.html">Gallery</a></li>
+             <li><a href="todo_list.html">Todo List</a></li>
+             <li><a href="dropzone.html">Dropzone File Upload</a></li>
+             <li><a href="inline_editor.html">Inline Editor</a></li>
+             <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
+           </ul>
+         </li>
+         <li class="sub-menu">
+           <a href="javascript:;">
+             <i class="fa fa-cogs"></i>
+             <span>Fee Challan</span>
+             </a>
+           <ul class="sub">
+             <li><a href="/getchallan">Generate Fee Challan</a></li>
+             <li><a href="/status">Fee Status</a></li>
+              {{-- <li><a href="gallery.html">Gallery</a></li>
+             <li><a href="todo_list.html">Todo List</a></li>
+             <li><a href="dropzone.html">Dropzone File Upload</a></li>
+             <li><a href="inline_editor.html">Inline Editor</a></li>
+             <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
+           </ul>
+         </li>
+       </ul>
+      
+      {{-- Admin --}}
+      @elseif(Auth::user()->role_id == 2)
+      <ul  class="sidebar-menu" id="nav-accordion">
+        <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+        <h5 class="centered">Sam Soffes</h5>
+        <li class="mt">
+          <a class="active" href="index.html">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-desktop"></i>
+            <span>HR</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/student">Add New Student</a></li>
+            <li><a href="/viewstudents">View Students</a></li>
+            <li><a href="/employee">Add New Employee</a></li>
+            <li><a href="/viewemployee">View Employee</a></li>
+            <li><a href="/parents">Add Parents Information</a></li>
+            <li><a href="/parentinfo">View parents Information</a></li>
+            {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
+            {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-cogs"></i>
+            <span>Accounts</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/setfees">Set Fees Structure</a></li>
+           <li><a href="/viewfees">View Fees Structure</a></li>
+           <li><a href="/feechallan">Generate Fee Challan</a></li>
+           <li><a href="/paymenthistory">Payment History</a></li>
+             {{-- <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="todo_list.html">Todo List</a></li>
+            <li><a href="dropzone.html">Dropzone File Upload</a></li>
+            <li><a href="inline_editor.html">Inline Editor</a></li>
+            <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-book"></i>
+            <span>Classes</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/class">Classes</a></li>
+            <li><a href="/subjects">Subject</a></li>
+            <li><a href="/assign">Assign Subjects</a></li>
+            {{-- <li><a href="/section">Section</a></li> --}}
+            {{-- <li><a href="lock_screen.html">Lock Screen</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="invoice.html">Invoice</a></li>
+            <li><a href="pricing_table.html">Pricing Table</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="404.html">404 Error</a></li>
+            <li><a href="500.html">500 Error</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-desktop"></i>
+            <span>Class Activities</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/check_homework">Home Work</a></li>
+            <li><a href="/check_lectures">Lectures</a></li>
+            {{-- <li><a href="/new_homework">Add Home Work</a></li>
+            <li><a href="/employee">Mark Attendance</a></li> --}}
+            {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
+            {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-cogs"></i>
+            <span>Results</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/result">Check Your Result</a></li>
+             {{-- <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="todo_list.html">Todo List</a></li>
+            <li><a href="dropzone.html">Dropzone File Upload</a></li>
+            <li><a href="inline_editor.html">Inline Editor</a></li>
+            <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-cogs"></i>
+            <span>Fee Challan</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/getchallan">Generate Fee Challan</a></li>
+            <li><a href="/status">Fee Status</a></li>
+             {{-- <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="todo_list.html">Todo List</a></li>
+            <li><a href="dropzone.html">Dropzone File Upload</a></li>
+            <li><a href="inline_editor.html">Inline Editor</a></li>
+            <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-desktop"></i>
+            <span>Class Activities</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/new_lectures">Add Lectures</a></li>
+            <li><a href="/view_lecture">View Lectures</a></li>
+            <li><a href="/new_homework">Add Home Work</a></li>
+            {{-- <li><a href="/mark_attendance">Mark Attendance</a></li> --}}
+            {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
+            {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-desktop"></i>
+            <span>Attendance</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/mark_attendance">Mark Attendance</a></li>
+            <li><a href="/attendance/view_attendance">View Attendance</a></li>
+            {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-cogs"></i>
+            <span>Results</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/markresult">Mark Student Results</a></li>
              {{-- <li><a href="gallery.html">Gallery</a></li>
             <li><a href="todo_list.html">Todo List</a></li>
             <li><a href="dropzone.html">Dropzone File Upload</a></li>

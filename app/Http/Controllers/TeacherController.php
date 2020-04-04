@@ -145,12 +145,13 @@ class TeacherController extends Controller
     }
 
     public function createmarks(Request $request){
-        // dd($request);
+        dd($request);
         $results = new Result();
         $results->subject_id = $request->subject_id;
         $results->year = $request->year;
         $results->student_id = $request->student_id;
         $results->marks = $request->marks;
+        $results->exam = $request->exam;
         $results->save();
 
        return $this->markresult();

@@ -113,3 +113,9 @@ Route::any('/getchallan','StudentController@getchallan');
 Route::any('/status','StudentController@feestatus');
 
 Route::get('pdfview',array('as'=>'pdfview','uses'=>'StudentController@pdfview'));
+
+//================== Examination ===========================
+Route::any('/exam_timetable','ExaminationController@exam_timetable');
+Route::any('/syllabus','ExaminationController@syllabus');
+Route::any('/announceresult','ExaminationController@announceresult');
+Route::any('/searchresult','ExaminationController@searchresult');
