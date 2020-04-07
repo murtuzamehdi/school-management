@@ -23,6 +23,7 @@
                   <th>Subject</th>
                   <th>Student</th>
                   <th>Year</th>
+                  <th>Exam</th>
                   <th>Obtain Marks</th>
                   <th class="hidden-phone">Action</th>
                 </tr>
@@ -36,6 +37,15 @@
                       <td>{{$results->year}}</td>
                       <form action="/createmarks" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
+                        {{-- <div class="form-group"> --}}
+                          <td>
+
+                            <select class="form-control" name="exam">
+                              <option value="Mid-Term">Mid-Term</option> 
+                              <option value="Final-Term">Final-Term</option>
+                            </select>
+                          {{-- </div> --}}
+                        </td>
                         <td><input type="text" name="marks"></td>
                         <td>
                         <input type="hidden" value="{{$results->subject_id}}" name="subject_id">

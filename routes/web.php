@@ -118,4 +118,6 @@ Route::get('pdfview',array('as'=>'pdfview','uses'=>'StudentController@pdfview'))
 Route::any('/exam_timetable','ExaminationController@exam_timetable');
 Route::any('/syllabus','ExaminationController@syllabus');
 Route::any('/announceresult','ExaminationController@announceresult');
-Route::any('/searchresult','ExaminationController@searchresult');
+Route::any('/searchresult','ExaminationController@searchstudents');
+// Route::any('/attendance/edit','ExaminationController@searchstudents');
+Route::any('student/{id}/report', 'ExaminationController@makereport');

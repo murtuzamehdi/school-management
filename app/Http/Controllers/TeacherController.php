@@ -145,7 +145,7 @@ class TeacherController extends Controller
     }
 
     public function createmarks(Request $request){
-        dd($request);
+        // dd($request);
         $results = new Result();
         $results->subject_id = $request->subject_id;
         $results->year = $request->year;
