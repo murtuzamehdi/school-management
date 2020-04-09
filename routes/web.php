@@ -95,6 +95,9 @@ Route::any('/view_lecture','TeacherController@view_lecture');
 Route::get('/new_homework', function () {
     return view('Teachers.new_homework');
 });
+// Route::get('/new_syllabus', function () {
+//     return view('Teachers.mark_syllabus');
+// });
 Route::any('/homework','TeacherController@createhomework');
 
 Route::any('/markresult', 'TeacherController@markresult');
@@ -104,6 +107,8 @@ Route::any('/attendance/save_attendance', 'TeacherController@saveattendance');
 Route::any('/attendance/view_attendance', 'TeacherController@show');
 Route::any('/attendance/edit', 'TeacherController@edit');
 Route::any('/attendance/update', 'TeacherController@update');
+Route::any('/createsyllabus', 'TeacherController@createsyllabus');
+Route::any('/new_syllabus', 'TeacherController@showsyllabus');
 
 //=================== student ===========================
 Route::any('/check_homework','StudentController@homework');
@@ -115,7 +120,11 @@ Route::any('/status','StudentController@feestatus');
 Route::get('pdfview',array('as'=>'pdfview','uses'=>'StudentController@pdfview'));
 
 //================== Examination ===========================
-Route::any('/exam_timetable','ExaminationController@exam_timetable');
+Route::any('/createtimetable', 'ExaminationController@createtimetable');
+Route::any('timetable','ExaminationController@timetable');
+Route::get('/exam_timetable', function () {
+    return view('Examination.timetable_exams');
+});
 Route::any('/syllabus','ExaminationController@syllabus');
 Route::any('/announceresult','ExaminationController@announceresult');
 Route::any('/searchresult','ExaminationController@searchstudents');

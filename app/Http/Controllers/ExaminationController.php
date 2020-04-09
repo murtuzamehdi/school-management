@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use App\TimeTable;
 use DB;
 
 class ExaminationController extends Controller
@@ -72,9 +73,19 @@ class ExaminationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function timetable(Request $request)
     {
-        //
+        // dd($request);
+
+        $timetable = DB::table('classes')
+        ->join('subjects','subjects.class_id', '=' ,'classes.class_id')
+        ->select('classes.*','subjects.*')
+        ->where('classes.class_id',$request->class_id)
+        ->get();
+        
+        // ->join('')
+        // dd($timetable);
+        return view('Examination.timetable_exams',compact('timetable'));
     }
 
     /**
@@ -83,9 +94,41 @@ class ExaminationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function createtimetable(Request $request)
     {
-        //
+        // $teacher_id = Auth::user()->id;
+        $data = $request->all();
+        // dd($data["student_roll_no"]);
+        $count = count($data["subject_id"]);
+        // $now = Carbon::now();
+        // $date =$now->format('Y-m-d');
+        // dd($date);
+        $att = DB::table('time_tables')
+        ->where('date', $request->date[1])->get();
+        
+        if($att->isEmpty()){
+            // dd('asdsad');
+            for($i = 1 ; $i <= $count ; $i++){
+                $done = TimeTable::create([
+                    'subject_id' => $data["subject_id"][$i],
+                    'class_id' => $data["class_id"][$i],
+                    'yearofexam' => $data["yearofexam"][$i],
+                    'exam' => $data["exam"][$i],
+                    'date' => $data["date"][$i],
+                    'start_time' => $data["start_time"][$i],
+                    'end_time' => $data["end_time"][$i]
+                    ]);
+            }
+            toastr()->success('Time Table Created succesfully');
+        }
+        else{
+            // dd('asd');
+            toastr()->warning('Timetable already taken');
+            // return redirect()->back();
+        }
+        return redirect()->back();
+        
+        // dd($request);
     }
 
     /**

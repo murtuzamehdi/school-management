@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSyllabiTable extends Migration
+class CreateTimeTablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateSyllabiTable extends Migration
      */
     public function up()
     {
-        Schema::create('syllabi', function (Blueprint $table) {
+        Schema::create('time_tables', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('class_id')->nullable();
             $table->string('subject_id')->nullable();
+            $table->string('yearofexam')->nullable();
             $table->string('exam')->nullable();
-            $table->string('syllabus')->nullable();
-            $table->bigInteger('user_id')->nullable();
-
+            $table->string('date')->nullable();
+            $table->string('start_time')->nullable();
+            $table->string('end_time')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateSyllabiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('syllabi');
+        Schema::dropIfExists('time_tables');
     }
 }

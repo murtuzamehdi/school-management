@@ -9,6 +9,7 @@ use App\StudentAttendance;
 use App\Lectures;
 use App\Homework;
 use App\Result;
+use App\Syllabus;   
 use DB;
 class TeacherController extends Controller
 {
@@ -220,31 +221,43 @@ class TeacherController extends Controller
         return redirect()->back();
     }
 
+    public function showsyllabus(){
+        $id = Auth::user()->id;
+        $syllabusshow = DB::table('syllabi')
+        ->join('classes','classes.class_id','=','syllabi.class_id')
+        ->join('subjects','subjects.subject_id','=','syllabi.subject_id')
+        ->select('syllabi.*','classes.*','subjects.*')
+        ->where('syllabi.user_id',$id)
+        ->get();
+        
+        return view('Teachers.mark_syllabus',compact('syllabusshow'));
+        // return view('')
+    }
+
     
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function createsyllabus(Request $request)
     {
-        //
+        // dd($request);
+        $id = Auth::user()->id;
+        $syllabus = new Syllabus();
+        $syllabus->subject_id = $request->subject_id;
+        $syllabus->class_id = $request->class_id;
+        $syllabus->exam = $request->exam;
+        $syllabus->user_id = $id;
+
+        if($request->hasfile('syllabus')){
+            $file = $request->file('syllabus');
+            $extension = $file->getClientOriginalExtension(); 
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/syllabus/' , $filename);
+            $syllabus->syllabus = $filename;
+        }else {
+            $syllabus->syllabus = $request->syllabus;
+        }
+
+        $syllabus->save();
+
+        return $this->showsyllabus();
+
     }
 }

@@ -29,13 +29,14 @@
           <div class="col-lg-12">
             <div class="form-panel">
               <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
-              <form class="form-horizontal style-form" method="POST" action="/teacher" accept-charset="UTF-8" enctype="multipart/form-data">
+              <form class="form-horizontal style-form" method="POST" action="/createsyllabus" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
             @php
         $subjectteacher = DB::table('subject_teachers')
         ->join('employees','employees.employee_id','=','subject_teachers.teacher_id')
         ->join('subjects','subjects.subject_id','=','subject_teachers.subject_id')
-        ->select('subject_teachers.*','employees.*','subjects.*')
+        ->join('classes','classes.class_id','=','subjects.class_id')
+        ->select('subject_teachers.*','employees.*','subjects.*','classes.*')
         ->where('employees.user_id',Auth::user()->id)
         ->get();
             @endphp
@@ -49,17 +50,43 @@
                     @endforeach
                   </select>
               </div>
+              
             </div>
             <div class="form-group">
-           <label class="col-sm-2 col-sm-2 control-label">Upload Lecture</label>
+              <label class="col-sm-2 col-sm-2 control-label">Class</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="class_id">
+                    <option></option>
+                    @foreach ($subjectteacher as $subjects)        
+                    <option value="{{$subjects->class_id}}">{{$subjects->class_name}}</option>
+                    @endforeach
+                  </select>
+              </div>
+              
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-2 control-label">Exam</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="exam">
+                    <option value="Mid-Term">Mid-Term</option>     
+                    <option value="Final-Term">Final-Term</option>
+
+                  </select>
+              </div>
+              
+            </div>
+            <div class="form-group">
+           <label class="col-sm-2 col-sm-2 control-label">Upload Syllabus</label>
            <div class="col-sm-10">
-           <input type="file" name="lecture" class="form-control" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+           <input type="file" name="syllabus" class="form-control" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
             </div>
             </div>
+            <h1>OR</h1>
         <div class="form-group">
-           <label class="col-sm-2 col-sm-2 control-label">Lecture</label>
+           <label class="col-sm-2 col-sm-2 control-label">Write Syllabus</label>
            <div class="col-sm-10">
-           <input type="text" name="lecture_name" class="form-control">
+           {{-- <input type="text" name="lecture_name" class="form-control"> --}}
+           <textarea name="syllabus" class="form-control" cols="30" rows="10"></textarea>
        </div>
         </div>
 
@@ -73,49 +100,62 @@
         </div>
         <!-- /row -->
         <!-- INPUT MESSAGES -->
+        if(@isset($syllabusshow)
+            
         <section id="main-content">
             <section class="wrapper">
               <h3><i class="fa fa-angle-right"></i> Advanced Table Example</h3>
               <div class="row mb">
-                <!-- page start-->
-                <div class="content-panel">
-                  <div class="adv-table">
-                    <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
-                      <thead>
+                  <!-- page start-->
+                  <div class="content-panel">
+                      <div class="adv-table">
+                          <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                              <thead>
                         <tr>
                           <th>Subject</th>
-                          <th>Teacher</th>
-                          <th>Year</th>
+                          <th>Class</th>
+                          <th>Exam</th>
+                          <th>Syllabus</th>
                           <th class="hidden-phone">Action</th>
                         </tr>
-                      </thead>
-                      <tbody>
-                          {{-- @foreach ($subjectteacher as $subjectteachers) --}}
-                              
-                          <tr class="gradeX">
-                              {{-- <td>{{$subjectteachers->subject_name}}</td>
-                              <td>{{$subjectteachers->employee_name}}</td>
-                              <td>{{$subjectteachers->year}}</td> --}}
+                    </thead>
+                    <tbody>
+                        @foreach ($syllabusshow as $show)
+                        
+                        <tr class="gradeX">
+                              <td>{{$show->subject_name}}</td>
+                              <td>{{$show->class_name}}</td>
+                              <td>{{$show->exam}}</td>
+                              {{-- <td> <a style="margin-left:50px;display:block;text-decoration:none;" href="{{url('/')."/uploads/lectures/".$show->syllabus}}"> Download</a></td> --}}
                               <td>
-                              {{-- <button type="submit" class="btn btn-primary btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$subjectteachers->subject_id}}"><i class="fa fa-pencil"></i></button> --}}
-                                {{-- <a href="employee/{{$class->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a> --}}
-                                  <button class="btn btn-danger btn-xs"><i class=" fa fa-trash-o"></i></button>
+                                @if(file_exists('uploads/syllabus/'.$show->syllabus))
+                                <a style="margin-left:50px;display:block;text-decoration:none;" href="{{url('/')."/uploads/syllabus/".$show->syllabus}}"> Download</a>
+                              @else
+                              {{$show->syllabus}}
+                              {{-- <textarea name="syllabus" class="form-control" value="{{$show->syllabus}}" cols="30" rows="10"></textarea> --}}
+                              @endif
                               </td>
+                              <td>
+                                  {{-- <button type="submit" class="btn btn-primary btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$subjectteachers->subject_id}}"><i class="fa fa-pencil"></i></button>
+                                  <a href="employee/{{$class->id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a> --}}
+                                  <button class="btn btn-danger btn-xs"><i class=" fa fa-trash-o"></i></button>
+                                </td>
                           </tr>
                           
-                          {{-- @endforeach --}}
-                      </tbody>
+                          @endforeach
+                        </tbody>
                     </table>
                   </div>
                 </div>
                 <!-- page end-->
-              </div>
+            </div>
+            @endisset)
               <div class="container">
                   <!-- Modal -->
                   <div class="modal fade" id="myModal" role="dialog">
                     <div class="modal-dialog">
                     
-                      <!-- Modal content-->
+                        <!-- Modal content-->
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
