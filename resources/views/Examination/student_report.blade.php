@@ -74,8 +74,8 @@
                         <td colspan="2">{{$result->subject_name}}</td>
                         <td>{{$result->class_name}}</td>
                         <td>{{$result->year}}</td>
-                        <td>100</td>
                         <td>{{$result->marks}}</td>
+                        <td>{{$result->obtain_marks}}</td>
                     </tr>
                     @endforeach
                   <tr>
@@ -85,8 +85,8 @@
                   <tr>
                     <td></td>
                     <td colspan="4" class="footer">Total</td>
-                    <td> 200 </td>
-                  <td colspan="2">{{$total}}</td>
+                    <td>{{$marks}}</td>
+                  <td colspan="2">{{$obtain_marks}}</td>
                   </tr>
                   <tr>
                     <td colspan="4" class="footer">Percentage</td>

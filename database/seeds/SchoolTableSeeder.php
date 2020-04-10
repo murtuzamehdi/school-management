@@ -31,9 +31,9 @@ class SchoolTableSeeder extends Seeder
             'dept_name' => ('Examination'),
         ]);
 
-        // DB::table('departments')->insert([
-        //     'dept_name' => ('Accounts'),
-        // ]);
+        DB::table('departments')->insert([
+            'dept_name' => ('Admission'),
+        ]);
 
         // DB::table('departments')->insert([
         //     'dept_name' => ('Accounts'),
@@ -64,9 +64,9 @@ class SchoolTableSeeder extends Seeder
             'name' => ('Examination'),
         ]);
 
-        // DB::table('roles')->insert([
-        //     'name' => ('Parent'),
-        // ]);
+        DB::table('roles')->insert([
+            'name' => ('Admission'),
+        ]);
 
         // DB::table('roles')->insert([
         //     'name' => ('Parent'),

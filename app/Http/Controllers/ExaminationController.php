@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use App\Result;
 use App\TimeTable;
 use DB;
 
@@ -54,9 +55,10 @@ class ExaminationController extends Controller
         ->where('students.student_id',$id)
         ->get();
         
-        $total = $results->sum('marks');
-        if ($total != 0) {
-            $percent = $total / 200 * 100;
+        $marks = $results->sum('marks');
+        $obtain_marks = $results->sum('obtain_marks');
+        if ($marks != 0) {
+            $percent = $obtain_marks / $marks * 100;
             } else {
             $percent = 0;
             }
@@ -65,7 +67,27 @@ class ExaminationController extends Controller
     //    foreach ($results as $value) {
     //       dd($value[0]->marks);
     //    }
-       return view('Examination.student_report',compact('results','total','percent'));
+       return view('Examination.student_report',compact('results','marks','obtain_marks','percent'));
+    }
+
+    public function updateresult(Request $request){
+        
+        $data=$request->all();
+        // dd($data['id'][0]);
+        $count= count($data['id']);
+        // dd($count);
+        for($i = 0 ; $i < $count ; $i++){
+            $result = Result::where('student_id', $data['id'][$i])->get();
+            foreach ($result as $results) {
+                # code...
+                $results->status_report = 1;
+                // dd($results);
+                $results->save();
+            }
+            // FeeDetail::create(['student_id' => $data["id"][$i],'due_date' => $data["due_date"] , 'fee_month' => $data["fee_month"] , 'fees_id' => $data["fees_id"], 'current_ammount' => $data["current_ammount"],'arrears' => $data["current_ammount"], 'fee_status' => 0]);
+            
+        }
+        dd('stop');
     }
 
     /**

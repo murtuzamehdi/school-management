@@ -212,6 +212,7 @@
   <aside>
     <div id="sidebar" class="nav-collapse ">
       <!-- sidebar menu start-->
+      {{-- HR --}}
       @if(Auth::user()->role_id == 3)
       <ul  class="sidebar-menu" id="nav-accordion">
         <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
@@ -228,15 +229,62 @@
             <span>HR</span>
             </a>
           <ul class="sub">
-            <li><a href="/student">Add New Student</a></li>
-            <li><a href="/viewstudents">View Students</a></li>
+            
             <li><a href="/employee">Add New Employee</a></li>
             <li><a href="/viewemployee">View Employee</a></li>
-            <li><a href="/parents">Add Parents Information</a></li>
-            <li><a href="/parentinfo">View parents Information</a></li>
+            
             {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
             {{-- <li><a href="font_awesome.html">Font Awesome</a></li> --}}
           </ul>
+        </li>
+        {{-- <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-cogs"></i>
+            <span>Accounts</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/setfees">Set Fees Structure</a></li>
+           <li><a href="/viewfees">View Fees Structure</a></li>
+           <li><a href="/feechallan">Generate Fee Challan</a></li>
+           <li><a href="/paymenthistory">Payment History</a></li>
+             <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="todo_list.html">Todo List</a></li>
+            <li><a href="dropzone.html">Dropzone File Upload</a></li>
+            <li><a href="inline_editor.html">Inline Editor</a></li>
+            <li><a href="file_upload.html">Multiple File Upload</a></li>
+          </ul>
+        </li> --}}
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-book"></i>
+            <span>Classes</span>
+            </a>
+          <ul class="sub">
+            <li><a href="/class">Classes</a></li>
+            <li><a href="/subjects">Subject</a></li>
+            <li><a href="/assign">Assign Subjects</a></li>
+            {{-- <li><a href="/section">Section</a></li> --}}
+            {{-- <li><a href="lock_screen.html">Lock Screen</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="invoice.html">Invoice</a></li>
+            <li><a href="pricing_table.html">Pricing Table</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="404.html">404 Error</a></li>
+            <li><a href="500.html">500 Error</a></li> --}}
+          </ul>
+        </li>
+      </ul>
+
+      {{-- Accounts --}}
+      @elseif(Auth::user()->role_id == 4)
+      <ul  class="sidebar-menu" id="nav-accordion">
+        <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+        <h5 class="centered">Sam Soffes</h5>
+        <li class="mt">
+          <a class="active" href="index.html">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+            </a>
         </li>
         <li class="sub-menu">
           <a href="javascript:;">
@@ -255,23 +303,35 @@
             <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
           </ul>
         </li>
+      </ul>
+
+      {{-- Admission --}}
+
+      @elseif(Auth::user()->role_id == 8)
+      <ul  class="sidebar-menu" id="nav-accordion">
+        <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+        <h5 class="centered">Sam Soffes</h5>
+        <li class="mt">
+          <a class="active" href="index.html">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+            </a>
+        </li>
         <li class="sub-menu">
           <a href="javascript:;">
-            <i class="fa fa-book"></i>
-            <span>Classes</span>
+            <i class="fa fa-cogs"></i>
+            <span>Admission</span>
             </a>
           <ul class="sub">
-            <li><a href="/class">Classes</a></li>
-            <li><a href="/subjects">Subject</a></li>
-            <li><a href="/assign">Assign Subjects</a></li>
-            {{-- <li><a href="/section">Section</a></li> --}}
-            {{-- <li><a href="lock_screen.html">Lock Screen</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="invoice.html">Invoice</a></li>
-            <li><a href="pricing_table.html">Pricing Table</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="404.html">404 Error</a></li>
-            <li><a href="500.html">500 Error</a></li> --}}
+            <li><a href="/student">Add New Student</a></li>
+            <li><a href="/viewstudents">View Students</a></li>
+            <li><a href="/parents">Add Parents Information</a></li>
+            <li><a href="/parentinfo">View parents Information</a></li>
+             {{-- <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="todo_list.html">Todo List</a></li>
+            <li><a href="dropzone.html">Dropzone File Upload</a></li>
+            <li><a href="inline_editor.html">Inline Editor</a></li>
+            <li><a href="file_upload.html">Multiple File Upload</a></li> --}}
           </ul>
         </li>
       </ul>

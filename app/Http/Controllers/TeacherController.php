@@ -152,7 +152,9 @@ class TeacherController extends Controller
         $results->year = $request->year;
         $results->student_id = $request->student_id;
         $results->marks = $request->marks;
+        $results->obtain_marks = $request->obtain_marks;
         $results->exam = $request->exam;
+        $results->status_report = 0;
         $results->save();
 
        return $this->markresult();

@@ -14,14 +14,19 @@ class CreateResultsTable extends Migration
     public function up()
     {
         Schema::create('results', function (Blueprint $table) {
-            // $table->bigIncrements('id');
-            $table->integer('subject_id');
-            $table->string('year');
-            // $table->primary(['subject_id', 'year']);
-            $table->integer('student_id')->nullable();
+            $table->engine = 'MyISAM';
+            $table->bigInteger('id');
+            $table->bigInteger('subject_id');
+            $table->bigInteger('year');
+            $table->string('exam');
+            $table->bigInteger('student_id');
+            $table->primary(['id','subject_id', 'year','exam','student_id']);
             $table->integer('marks')->nullable();
+            $table->integer('obtain_marks')->nullable();
+            $table->integer('status_report')->nullable();
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE results MODIFY id INTEGER NOT NULL AUTO_INCREMENT');
     }
 
     /**

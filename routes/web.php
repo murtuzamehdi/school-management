@@ -96,7 +96,7 @@ Route::get('/new_homework', function () {
     return view('Teachers.new_homework');
 });
 // Route::get('/new_syllabus', function () {
-//     return view('Teachers.mark_syllabus');
+    //     return view('Teachers.mark_syllabus');
 // });
 Route::any('/homework','TeacherController@createhomework');
 
@@ -130,3 +130,4 @@ Route::any('/announceresult','ExaminationController@announceresult');
 Route::any('/searchresult','ExaminationController@searchstudents');
 // Route::any('/attendance/edit','ExaminationController@searchstudents');
 Route::any('student/{id}/report', 'ExaminationController@makereport');
+Route::any('generatereport/bulk', 'ExaminationController@updateresult');

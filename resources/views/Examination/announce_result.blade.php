@@ -132,15 +132,15 @@
  <!--script for this page-->
  <script>
    $('.select-check').on('click' , function () {
-     var due_date = $('#due_date').val();
-     var fee_month = $('#fee_month').val();
-     var fees_id = $('#fees_id').val();
-     var current_ammount = $('#current_ammount').val();
+    //  var due_date = $('#due_date').val();
+    //  var fee_month = $('#fee_month').val();
+    //  var fees_id = $('#fees_id').val();
+    //  var current_ammount = $('#current_ammount').val();
      var id = new Array;
      $("input:checkbox[name=selected-check]:checked").each(function(){
        id.push($(this).val());  
      });
-     console.log(id,due_date,fee_month,fees_id,current_ammount);
+     console.log(id);
      $.ajax({
        url: 'generatereport/bulk',
        method:'POST',
@@ -148,10 +148,6 @@
        data : {
          "_token" : "{{ csrf_token() }}",
          "id"    : id,
-         "due_date":due_date,
-         "fee_month":fee_month,
-         "fees_id":fees_id,
-         "current_ammount":current_ammount,
        },
        success:function(data){
          location.reload(true);

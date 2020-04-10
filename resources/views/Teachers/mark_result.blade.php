@@ -24,6 +24,7 @@
                   <th>Student</th>
                   <th>Year</th>
                   <th>Exam</th>
+                  <th>Marks</th>
                   <th>Obtain Marks</th>
                   <th class="hidden-phone">Action</th>
                 </tr>
@@ -47,6 +48,7 @@
                           {{-- </div> --}}
                         </td>
                         <td><input type="text" name="marks"></td>
+                        <td><input type="text" name="obtain_marks"></td>
                         <td>
                         <input type="hidden" value="{{$results->subject_id}}" name="subject_id">
                         <input type="hidden" value="{{$results->student_id}}" name="student_id">
