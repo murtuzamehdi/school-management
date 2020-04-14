@@ -2,38 +2,6 @@
 <html lang="en">
 
 @include('layouts.header')
-<style>
-    html {
-    font-family:arial;
-    font-size: 18px;
-  }
-
-  td {
-    border: 1px solid #726E6D;
-    padding: 15px;
-  }
-
-  thead{
-    font-weight:bold;
-    text-align:center;
-    background: #625D5D;
-    color:white;
-  }
-
-  table {
-    border-collapse: collapse;
-  }
-
-  .footer {
-    text-align:right;
-    font-weight:bold;
-  }
-
-  tbody >tr:nth-child(odd) {
-    background: #D1D0CE;
-  }
-
-</style>
 
 <body>
   <section id="container">
@@ -48,53 +16,23 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-      <h3><i class="fa fa-angle-right"></i>Report Card Of {{$results[0]->student_name}} <b style="color:black;">{{$results[0]->exam}}</b></h3>
-      {{-- </div> --}}
-  
-      <div class="row mt">
+        <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+        <div class="row mt">
           <div class="col-lg-12">
-            <table>
-                <thead>
-                  <tr>
-                    <td colspan="3">Course </td>
-                    <td rowspan="2"> Class </td>
-                    <td rowspan="2"> Year </td>
-                    <td colspan="2"> Grade </td>
-                  </tr>
-                  <tr>
-                    <td>id </td>
-                    <td colspan="2"> Name </td>
-                    <td> Marks </td>
-                    <td> Obtain Marks </td>
-                  </tr>
-                </thead>
-                <tbody>
-                    @foreach ($results as $result)
-                        
-                    <tr>
-                    <td>{{$result->subject_id}}</td>
-                        <td colspan="2">{{$result->subject_name}}</td>
-                        <td>{{$result->class_name}}</td>
-                        <td>{{$result->year}}</td>
-                        <td>{{$result->marks}}</td>
-                        <td>{{$result->obtain_marks}}</td>
-                    </tr>
-                    @endforeach
-                  <tr>
-                </tbody>
-                <tfoot>
-                  
-                  <tr>
-                    <td></td>
-                    <td colspan="4" class="footer">Total</td>
-                    <td>{{$marks}}</td>
-                  <td colspan="2">{{$obtain_marks}}</td>
-                  </tr>
-                  <tr>
-                    <td colspan="4" class="footer">Percentage</td>
-                  <td colspan="3">{{$percent}}%</td>
-                  </tr>
-              </table>
+            @foreach ($syllabus as $sylla)
+            <div style="padding:10px;" class="col-lg-3">
+              {{-- <img style="width:50%;" src="{{URL::asset('ppt.png')}}"><br>
+            <label style="margin-left:55px;">{{$sylla->exam}}</label>
+              <a style="margin-left:50px;display:block;text-decoration:none;" href="{{url('/')."/uploads/syllabus/".$sylla->syllabus}}"> Download</a> --}}
+              @if(file_exists('uploads/syllabus/'.$sylla->syllabus))
+              <img style="width:50%;" src="{{URL::asset('ppt.png')}}"><br>
+              <a style="margin-left:50px;display:block;text-decoration:none;" href="{{url('/')."/uploads/syllabus/".$sylla->syllabus}}"> Download</a>
+            @else
+            {{$sylla->syllabus}}
+            {{-- <textarea name="syllabus" class="form-control" value="{{$show->syllabus}}" cols="30" rows="10"></textarea> --}}
+            @endif
+            </div>
+            @endforeach
           </div>
         </div>
       </section>

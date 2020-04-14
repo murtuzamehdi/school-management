@@ -246,6 +246,7 @@ class TeacherController extends Controller
         $syllabus->class_id = $request->class_id;
         $syllabus->exam = $request->exam;
         $syllabus->user_id = $id;
+        $syllabus->status_syllabus = 0;
 
         if($request->hasfile('syllabus')){
             $file = $request->file('syllabus');

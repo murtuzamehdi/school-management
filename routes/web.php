@@ -31,6 +31,7 @@ Route::any('student/{id}', 'HRController@update');
 Route::any('employee/fetchdata/{id}', 'HRController@fetchemployee');
 Route::any('employee/{id}/edit', 'HRController@editemployee');
 Route::any('employee/{id}', 'HRController@updateemployee');
+Route::any('/deleteemployee','HRController@deleteemployee');
 
 
 Route::any('parent/fetchdata/{id}', 'HRController@fetchparent');
@@ -113,6 +114,7 @@ Route::any('/new_syllabus', 'TeacherController@showsyllabus');
 //=================== student ===========================
 Route::any('/check_homework','StudentController@homework');
 Route::any('/check_lectures','StudentController@lectures');
+Route::any('/check_syllabus','StudentController@syllabus');
 Route::any('/result','StudentController@result');
 Route::any('/getchallan','StudentController@getchallan');
 Route::any('/status','StudentController@feestatus');
@@ -125,7 +127,7 @@ Route::any('timetable','ExaminationController@timetable');
 Route::get('/exam_timetable', function () {
     return view('Examination.timetable_exams');
 });
-Route::any('/syllabus','ExaminationController@syllabus');
+// Route::any('/syllabus','ExaminationController@syllabus');
 Route::any('/announceresult','ExaminationController@announceresult');
 Route::any('/searchresult','ExaminationController@searchstudents');
 // Route::any('/attendance/edit','ExaminationController@searchstudents');

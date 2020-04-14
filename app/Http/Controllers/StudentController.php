@@ -249,17 +249,42 @@ class StudentController extends Controller
         return view('students.lecture',compact('lecture'));
     }
 
-    public function result(){
+    public function syllabus(){
         $id = Auth::user()->id;
-        $result = DB::table('results')
-        ->join('subjects','subjects.subject_id', '=' , 'results.subject_id')
-        ->join('students','students.student_id' , '=' , 'results.student_id')
-        ->select('students.*','subjects.*','results.*')
+        $syllabus = DB::table('students')
+        ->join('subjects','subjects.class_id', '=' , 'students.student_class_of_admission')
+        ->join('syllabi','syllabi.subject_id' , '=' , 'subjects.subject_id')
+        ->select('students.*','subjects.*','syllabi.*')
         ->where('students.user_id',$id)
         ->get();
+        // dd($syllabus);
+        return view('students.syllabus',compact('syllabus'));
+    }
+
+    public function result(){
+        $id = Auth::user()->id;
+        $results = DB::table('students')
+        ->join('classes','classes.class_id' , '=' , 'students.student_class_of_admission')
+        ->join('results','results.student_id' , '=' , 'students.student_id')
+        ->join('subjects','subjects.subject_id' , '=' , 'results.subject_id')
+        ->select('students.*','classes.*','results.*','subjects.*')
+        ->where('students.user_id',$id)
+        ->where('results.status_report',1)
+        // ->where()
+        ->get();
+        // dd($results);
+        
+        $marks = $results->sum('marks');
+        $obtain_marks = $results->sum('obtain_marks');
+        if ($marks != 0) {
+            $percent = $obtain_marks / $marks * 100;
+            } else {
+            $percent = 0;
+            }
+
         // dd($result);
         
-        return view('students.check_result',compact('result'));
+        return view('students.check_result',compact('results','marks','obtain_marks','percent'));
     }
 
     public function getchallan(){

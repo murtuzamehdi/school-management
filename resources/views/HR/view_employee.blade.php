@@ -86,7 +86,8 @@
                         <td>
                         <button type="submit" class="btn btn-success btn-xs viewBtn" data-toggle="modal" data-target="#myModal" id="{{$employees->employee_id}}"><i class=" fa fa-eye"></i></button>
                           <a href="employee/{{$employees->employee_id}}/edit"><button class="btn btn-primary btn-xs"><i class=" fa fa-pencil"></i></button></a>
-                            <button class="btn btn-danger btn-xs"><i class=" fa fa-trash-o"></i></button>
+                            {{-- <button class="btn btn-danger btn-xs"><i class=" fa fa-trash-o"></i></button> --}}
+                            <button type="submit" class="btn btn-danger btn-xs viewBtn" data-toggle="modal" data-target="#delete" id="{{$employees->employee_id}}"><i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
                     
@@ -182,6 +183,40 @@
               </div>
             </div>
             
+            {{-- Delete modal --}}
+            <div class="modal fade" id="delete" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form action="/deleteemployee" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+                      {{-- {{method_field('delete')}} --}}
+                      {{csrf_field()}}
+                    <div class="modal-body">
+                    <p class="text-center">
+                      Are you sure you want to delete this?
+                    </p>
+                        <input type="hidden" name="emp_idd" id="emp_idd" value="">
+            
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
+                      <button type="submit" class="btn btn-warning">Yes, Delete</button>
+                    </div>
+                  </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
           </div>
         <!-- /row -->
       </section>
@@ -227,7 +262,8 @@
         {
             // console.log(data);
           
-        //   $('#user_id').val(data[0].id); 
+          $('#emp_idd').val(data[0].employee_id); 
+        
           $('#employee_name').val(data[0].employee_name); 
           $('#employee_designation').val(data[0].employee_designation); 
           $('#employee_address').val(data[0].employee_address); 

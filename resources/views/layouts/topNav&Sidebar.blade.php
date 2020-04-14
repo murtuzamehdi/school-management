@@ -408,6 +408,7 @@
           <ul class="sub">
             <li><a href="/check_homework">Home Work</a></li>
             <li><a href="/check_lectures">Lectures</a></li>
+            <li><a href="/check_syllabus">Syllabus</a></li>
             {{-- <li><a href="/new_homework">Add Home Work</a></li>
             <li><a href="/employee">Mark Attendance</a></li> --}}
             {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}
@@ -464,7 +465,7 @@
              </a>
            <ul class="sub">
              <li><a href="/exam_timetable">Create Exams Time Table</a></li>
-             <li><a href="/syllabus">Syllabus</a></li>
+             {{-- <li><a href="/syllabus">Syllabus</a></li> --}}
              <li><a href="/announceresult">Make Report Card</a></li>
              {{-- <li><a href="/employee">Mark Attendance</a></li> --}}
              {{-- <li><a href="/setfees">Set Fees Structure</a></li> --}}

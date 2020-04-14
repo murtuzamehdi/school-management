@@ -87,8 +87,13 @@ class ExaminationController extends Controller
             // FeeDetail::create(['student_id' => $data["id"][$i],'due_date' => $data["due_date"] , 'fee_month' => $data["fee_month"] , 'fees_id' => $data["fees_id"], 'current_ammount' => $data["current_ammount"],'arrears' => $data["current_ammount"], 'fee_status' => 0]);
             
         }
-        dd('stop');
+        // dd('stop');
+        return redirect()->back();
     }
+
+    // public function updatesyllabus(Request $request){
+
+    // }
 
     /**
      * Show the form for creating a new resource.

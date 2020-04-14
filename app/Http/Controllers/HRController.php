@@ -219,7 +219,7 @@ class HRController extends Controller
         return view('HR.view_student',compact('students'));
     }
 
-    public function viewemployee(Request $request)
+    public function viewemployee()
     {
         $employee = Employee::all();
         // dd($students);
@@ -405,8 +405,10 @@ class HRController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteemployee(Request $request)
     {
-        //
+        Employee::find($request->emp_idd)->delete();
+        $this->viewemployee();
+      
     }
 }
